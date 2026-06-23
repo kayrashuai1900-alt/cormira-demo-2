@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f4ef">
+<title>扶光心舍 / Cormira · AI 行为科学</title>
+<template id="__bundler_thumbnail" data-bg-color="#f7f4ef">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#f7f4ef"/>
+    <g transform="translate(600 400)">
+      <path d="M188 -70 A220 220 0 1 0 188 70" fill="none" stroke="#1b1613" stroke-width="34" stroke-linecap="round"/>
+      <circle cx="0" cy="0" r="68" fill="none" stroke="#9c2b24" stroke-width="26"/>
+      <circle cx="0" cy="0" r="22" fill="#1b1613"/>
+      <circle cx="188" cy="0" r="46" fill="#9c2b24"/>
+    </g>
+  </svg>
+</template>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M25.4 9.4 A11.5 11.5 0 1 0 25.4 22.6' fill='none' stroke='%231b1613' stroke-width='2.2' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3.6' fill='none' stroke='%239c2b24' stroke-width='1.8'/%3E%3Ccircle cx='16' cy='16' r='1.5' fill='%231b1613'/%3E%3Ccircle cx='25.4' cy='16' r='2.8' fill='%239c2b24'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f4ef;          /* warm paper */
+  --bg-2:#efeae2;        /* deeper warm block */
+  --card:#f9f6f1;
+  --ink:#1b1613;         /* warm near-black */
+  --ink-2:#57514b;
+  --ink-3:#6f685f;
+  --accent:#9c2b24;      /* brick red — primary (Science) */
+  --accent-deep:#7e201a;
+  --plum:#7c2433;        /* oxblood — secondary (papers, published) */
+  --plum-deep:#5f1a26;
+  --dark:#221a16;        /* warm near-black panel */
+  --on-dark:#f7f4ef;
+  --on-dark-2:rgba(247,244,239,.64);
+  --on-dark-3:rgba(247,244,239,.40);
+  --line:rgba(27,22,19,.13);
+  --line-2:rgba(27,22,19,.07);
+  --line-dark:rgba(247,244,239,.16);
+  --container:1180px;
+  --gutter:clamp(20px,4vw,40px);
+  --radius:12px;
+  --radius-sm:8px;
+  --sans:"Hanken Grotesk","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --serif:"Newsreader","Noto Serif SC","Songti SC","STSong",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:78px;-webkit-text-size-adjust:100%;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.65;font-weight:400;letter-spacing:-.003em;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3,h4,p{margin:0}
+svg{display:block}
+::selection{background:rgba(156,43,36,.2)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.container{width:min(100%,var(--container));margin-inline:auto;padding-inline:var(--gutter)}
+html[data-lang="zh"] .en{display:none}
+html[data-lang="en"] .zh{display:none}
+
+/* ---------- shared atoms ---------- */
+.eyebrow{display:inline-flex;align-items:center;gap:11px;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);line-height:1}
+.eyebrow::before{content:"";width:18px;height:1.5px;background:currentColor;flex:none}
+.pill{display:inline-flex;align-items:center;gap:7px;width:max-content;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:500;line-height:1;color:var(--ink-2);background:transparent;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ink-3);flex:none}
+.pill.live::before{background:var(--accent)}
+.tlink{display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:500;color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:3px;transition:color .16s,border-color .16s}
+.tlink .arw{transition:transform .18s}
+.tlink:hover{color:var(--accent);border-color:var(--accent)}
+.tlink:hover .arw{transform:translateX(4px)}
+
+/* concentric "behavior map" mark — Cormira's own concept, drawn flat */
+.mark{flex:none}
+.mark circle.ring{fill:none;stroke:var(--line);stroke-width:1.4}
+.mark circle.node{fill:var(--accent)}
+.mark circle.node.n2,.mark circle.node.n4{fill:var(--ink)}
+.mark circle.center{fill:var(--ink)}
+/* orbital animation */
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes orbit-rev{to{transform:rotate(-360deg)}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:.7}}
+.mark .orbit--a{animation:orbit 32s linear infinite;transform-origin:12px 12px}
+.mark .orbit--b{animation:orbit-rev 22s linear infinite;transform-origin:12px 12px}
+.behavior-map .orbit--outer{animation:orbit 90s linear infinite;transform-origin:190px 180px}
+.behavior-map .orbit--inner{animation:orbit-rev 64s linear infinite;transform-origin:190px 180px}
+.behavior-map .orbit--core{animation:orbit 42s linear infinite;transform-origin:190px 180px}
+.behavior-map circle.hub{animation:pulse 7s ease-in-out infinite;transform-origin:190px 180px}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line-2)}
+.nav-row{height:64px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}
+.brand{display:inline-flex;align-items:center;gap:10px;width:max-content;font-weight:600;letter-spacing:.01em;font-size:15px}
+.brand .mark{width:20px;height:20px}
+.nav-links{display:flex;align-items:center;gap:34px;font-size:14px;color:var(--ink-2)}
+.nav-links a{position:relative;padding:22px 0;transition:color .16s}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:18px;height:1.5px;background:var(--accent);transition:right .2s ease}
+.nav-links a:hover,.nav-links a[aria-current="true"]{color:var(--ink)}
+.nav-links a[aria-current="true"]::after{right:0}
+.nav-actions{justify-self:end;display:none;align-items:center;gap:12px}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{min-width:40px;border:0;background:transparent;padding:6px 11px;color:var(--ink-3);font-size:12px;font-weight:500}
+.lang button.active{background:var(--ink);color:var(--bg)}
+.menu{display:none;border:0;background:transparent;width:38px;height:38px;position:relative}
+.menu span,.menu::before,.menu::after{content:"";position:absolute;left:9px;width:20px;height:1.5px;background:var(--ink);transition:.2s ease}
+.menu span{top:18.5px}.menu::before{top:13px}.menu::after{top:24px}
+.menu[aria-expanded="true"] span{opacity:0}
+.menu[aria-expanded="true"]::before{top:18.5px;transform:rotate(45deg)}
+.menu[aria-expanded="true"]::after{top:18.5px;transform:rotate(-45deg)}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- sections ---------- */
+.section{padding-block:clamp(84px,9.5vw,168px);background:var(--bg)}
+.section--warm{background:var(--bg-2)}
+.head{display:grid;grid-template-columns:1.6fr 1fr;gap:28px;align-items:end;margin-bottom:clamp(48px,5.5vw,76px)}
+.head-side{justify-self:end;text-align:right;max-width:30ch;color:var(--ink-3);font-size:13.5px;line-height:1.6}
+.title{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4.5vw,54px);line-height:1.08;letter-spacing:-.022em}
+.title-desc{margin-top:18px;color:var(--ink-2);font-size:17px;max-width:54ch;line-height:1.6}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(124px,15vh,176px);padding-bottom:clamp(76px,9vw,124px)}
+.hero-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:clamp(32px,5vw,64px);align-items:center}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(44px,7vw,90px);line-height:1.03;letter-spacing:-.025em;margin-top:34px;max-width:14ch}
+.hero-lead{margin-top:36px;max-width:52ch;font-size:clamp(16.5px,1.5vw,19px);color:var(--ink-2);line-height:1.62}
+.hero-actions{display:flex;gap:30px;flex-wrap:wrap;margin-top:44px}
+.hero-art{justify-self:end;width:100%;max-width:380px}
+.behavior-map{width:100%;height:auto}
+.behavior-map .lbl{font-family:var(--sans);font-size:12px;fill:var(--ink-3);letter-spacing:.02em}
+.behavior-map .lbl-out{animation:orbit-rev 90s linear infinite}
+.behavior-map .lbl-in{animation:orbit 64s linear infinite}
+.behavior-map circle.ring{fill:none;stroke:var(--line);stroke-width:1.3}
+.behavior-map circle.node{fill:var(--accent)}
+.behavior-map circle.node.alt{fill:var(--ink)}
+.behavior-map circle.hub{fill:none;stroke:var(--accent);stroke-width:1.6}
+.behavior-map circle.hubdot{fill:var(--ink)}
+
+/* principles */
+.principles{display:grid;grid-template-columns:repeat(3,1fr)}
+.principle{padding:34px 36px 34px 0}
+.principle+.principle{border-left:1px solid var(--line);padding-left:36px}
+.principle h3{font-size:19px;font-weight:600;letter-spacing:-.01em;margin-bottom:13px}
+.principle p{font-size:15px;color:var(--ink-2);line-height:1.72;max-width:34ch}
+.principle-note{margin-top:48px;font-family:var(--serif);font-style:italic;font-size:clamp(18px,2vw,22px);color:var(--accent);letter-spacing:-.01em}
+
+/* ---------- projects ---------- */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.proj{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:clamp(26px,3vw,38px);display:flex;flex-direction:column;transition:border-color .18s}
+.proj:hover{border-color:rgba(156,43,36,.32)}
+.proj-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:8px}
+.proj-eye{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);line-height:1.4}
+.proj h3{font-family:var(--serif);font-weight:500;font-size:clamp(25px,2.7vw,33px);line-height:1.12;letter-spacing:-.02em;margin:20px 0 14px}
+.proj p{font-size:15px;color:var(--ink-2);line-height:1.7;max-width:60ch}
+.proj-meta{margin-top:auto;padding-top:22px;border-top:1px solid var(--line-2);font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.proj-meta b{color:var(--ink);font-weight:600}
+/* card maturity — title-only differentiation */
+.proj--future h3{color:var(--ink-2)}
+/* trust metrics inside card (light bg) */
+.trust-inline{display:flex;flex-direction:column;gap:14px;margin:24px 0 6px}
+.trust-inline .metric-row{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-2)}
+.trust-inline .metric-row b{color:var(--ink);font-weight:500}
+.trust-inline .bar{height:4px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:6px}
+.trust-inline .bar i{display:block;height:100%;background:var(--accent);border-radius:99px}
+/* tags + stats inside project cards */
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:12px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.stat{padding:16px 4px 16px 0}
+.stat+.stat{border-left:1px solid var(--line-2);padding-left:14px}
+.stat b{display:block;font-family:var(--serif);font-weight:500;color:var(--accent);font-size:24px;line-height:1.1;letter-spacing:-.01em}
+.stat span{display:block;margin-top:5px;color:var(--ink-3);font-size:11.5px;line-height:1.3}
+.insts{color:var(--ink-3);font-size:12.5px;line-height:1.65}
+.preview{display:flex;flex-direction:column;gap:18px;margin-top:20px}
+
+/* ---------- research carousel (width-constrained, horizontal scroll) ---------- */
+.research-shell{position:relative;border-top:1px solid var(--line);padding-top:38px}
+.research-tools{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px}
+.research-counter{font-size:13px;color:var(--ink-3);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.research-counter b{color:var(--ink);font-weight:600}
+.research-arrows{display:flex;gap:8px}
+.arrow-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:17px;display:grid;place-items:center;transition:border-color .16s,color .16s}
+.arrow-btn:hover{border-color:rgba(156,43,36,.4);color:var(--accent)}
+.research-viewport{overflow:hidden}
+.research-track{display:flex;gap:18px;will-change:transform}
+.rcard{flex:0 0 calc((100% - 36px)/3);min-width:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:24px 23px;display:flex;flex-direction:column;min-height:236px;transition:border-color .18s}
+.research-progress{height:2px;background:var(--line-2);margin-top:26px;overflow:hidden}
+.research-progress i{display:block;height:100%;width:20%;background:var(--accent);transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.rcard:hover{border-color:rgba(124,36,51,.3)}
+.rcard h3{font-size:17px;font-weight:600;line-height:1.4;margin:18px 0 9px;letter-spacing:-.008em;overflow-wrap:anywhere}
+.rcard p{font-size:13.5px;color:var(--ink-2);line-height:1.62;flex:1}
+.rfoot{margin-top:20px;padding-top:14px;border-top:1px solid var(--line-2);display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--ink-3);font-size:12px}
+.plink{color:var(--plum);font-weight:600;display:inline-flex;gap:5px;align-items:center}
+.plink .arw{transition:transform .18s}
+.rcard:hover .plink .arw{transform:translate(2px,-2px)}
+
+/* ---------- team + contact (integrated) ---------- */
+.team-wrap{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(30px,4vw,60px);align-items:stretch}
+.team-body{display:flex;flex-direction:column}
+.team-cols{display:grid;grid-template-columns:1fr 1fr;gap:34px clamp(28px,3vw,48px)}
+.team-col h3{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.team-col p{font-size:15px;color:var(--ink-2);line-height:1.78}
+.hiring{margin-top:auto;padding-top:32px;border-top:1px solid var(--line);font-family:var(--serif);font-style:italic;font-size:clamp(18px,2vw,22px);color:var(--ink);line-height:1.5;letter-spacing:-.01em;max-width:70ch}
+.contact-card{background:var(--dark);color:var(--on-dark);border-radius:var(--radius);padding:clamp(30px,3.4vw,44px);display:flex;flex-direction:column;justify-content:space-between;gap:34px}
+.contact-quote{font-family:var(--sans);font-weight:400;font-size:15.5px;line-height:1.7;color:var(--on-dark-2)}
+.contact-sub{margin-top:18px;color:var(--on-dark-2);font-size:15px;line-height:1.62}
+.mail{display:inline-flex;align-items:center;justify-content:space-between;gap:14px;width:100%;padding:16px 20px;border-radius:var(--radius);background:var(--accent);color:#f9efeb;font-size:15px;font-weight:600;transition:background .18s}
+.mail:hover{background:#b1392f}
+.site-foot{border-top:1px solid var(--line);margin-top:clamp(54px,7vw,92px);padding-top:26px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--ink-3);font-size:12.5px}
+.site-foot .brand{color:var(--ink-2);font-weight:600}
+.site-foot strong{color:var(--ink-2);font-weight:600}
+
+/* ---------- responsive ---------- */
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero-art{max-width:320px;order:2;justify-self:center}
+  .hero h1{max-width:18ch}
+  .proj-grid{grid-template-columns:1fr}
+  .team-wrap{grid-template-columns:1fr;gap:36px}
+  .rcard{flex-basis:calc((100% - 18px)/2)}
+}
+@media(max-width:820px){
+  .nav-row{grid-template-columns:1fr auto}
+  .nav-links{position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:0;padding:8px var(--gutter) 18px;background:var(--bg);border-bottom:1px solid var(--line);display:none}
+  .nav-links.open{display:flex}
+  .nav-links a{width:100%;padding:13px 0}
+  .nav-links a::after{display:none}
+  .nav-actions{display:flex}
+  .menu{display:block}
+  .head{grid-template-columns:1fr;gap:14px}
+  .head-side{justify-self:start;text-align:left;max-width:none}
+  .proj-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .principles{grid-template-columns:1fr}
+  .principle{padding:28px 0}
+  .principle+.principle{border-left:0;border-top:1px solid var(--line);padding-left:0}
+  .principle p{max-width:none}
+  .stats{grid-template-columns:1fr}
+  .stat+.stat{border-left:0;border-top:1px solid var(--line-2);padding-left:0;padding-top:14px}
+  .rcard{flex-basis:85%}
+  .team-cols{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-row">
+    <a class="brand" href="#top" aria-label="Cormira">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M25.4 9.4 A11.5 11.5 0 1 0 25.4 22.6" fill="none" stroke="var(--ink)" stroke-width="1.9" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="3.6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="1.4" fill="var(--ink)"/>
+        <circle cx="25.4" cy="16" r="2.6" fill="var(--accent)"/>
+      </svg>
+      <span class="zh">扶光心舍</span><span class="en">Cormira</span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
+      <a href="#overview" data-section="overview"><span class="zh">概览</span><span class="en">Overview</span></a>
+      <a href="#work" data-section="work"><span class="zh">产品与研究</span><span class="en">Products &amp; Research</span></a>
+      <a href="#team" data-section="team"><span class="zh">团队与联系</span><span class="en">Team &amp; Contact</span></a>
+    </nav>
+    <div class="nav-actions">
+      <button class="menu" id="menu" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero" id="overview" data-nav-section>
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <span class="eyebrow"><span class="zh">AI 行为科学</span><span class="en">AI for Behavioral Science</span></span>
+      <h1><span class="zh">让 AI 照见人心</span><span class="en">Let AI understand human behavior</span></h1>
+      <p class="hero-lead"><span class="zh">Cormira（扶光心舍）是一家专注于 AI 行为科学的研究与产品公司。我们研究如何用结构化模型理解、预测和解释人类行为，并将这些方法应用于心理健康及真实世界中的行为研究。</span><span class="en">Cormira is a research and product company focused on AI for behavioral science. We study how structured models can understand, predict, and explain human behavior, and apply these methods to mental health and real-world behavioral research.</span></p>
+      <div class="hero-actions">
+        <a class="tlink" href="#work"><span class="zh">查看我们的工作</span><span class="en">Explore our work</span><span class="arw">→</span></a>
+        <a class="tlink" href="#research"><span class="zh">阅读研究成果</span><span class="en">Read our research</span><span class="arw">→</span></a>
+      </div>
+    </div>
+    <div class="hero-art reveal" aria-hidden="true">
+      <svg class="behavior-map" viewBox="36 16 308 328" role="img">
+        <circle class="ring" cx="190" cy="180" r="150"/>
+        <circle class="ring" cx="190" cy="180" r="104"/>
+        <circle class="ring" cx="190" cy="180" r="58"/>
+        <g class="orbit--outer">
+          <circle class="node" cx="86" cy="96" r="5.5"/>
+          <text class="lbl lbl-out" x="86" y="80" text-anchor="middle" style="transform-origin:86px 96px"><tspan class="zh">情境</tspan><tspan class="en">Context</tspan></text>
+          <circle class="node" cx="282" cy="262" r="5.5"/>
+          <text class="lbl lbl-out" x="282" y="246" text-anchor="middle" style="transform-origin:282px 262px"><tspan class="zh">结果</tspan><tspan class="en">Outcome</tspan></text>
+        </g>
+        <g class="orbit--inner">
+          <circle class="node alt" cx="300" cy="120" r="5.5"/>
+          <text class="lbl lbl-in" x="300" y="104" text-anchor="middle" style="transform-origin:300px 120px"><tspan class="zh">决策</tspan><tspan class="en">Decision</tspan></text>
+          <circle class="node alt" cx="118" cy="270" r="5.5"/>
+          <text class="lbl lbl-in" x="118" y="254" text-anchor="middle" style="transform-origin:118px 270px"><tspan class="zh">成因</tspan><tspan class="en">Cause</tspan></text>
+        </g>
+        <circle class="hub" cx="190" cy="180" r="30"/>
+        <g class="orbit--core">
+          <circle class="hubdot" cx="190" cy="180" r="3.2"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="section section--warm">
+  <div class="container">
+    <div class="principles reveal">
+      <article class="principle">
+        <h3><span class="zh">构建行为模型</span><span class="en">Model behavior</span></h3>
+        <p><span class="zh">我们不将人类行为简化为情绪打分或关键词匹配，而是研究情境、动机、约束与决策之间的关系。</span><span class="en">We don't reduce human behavior to sentiment scores or keyword matching. We study the relationships between context, motivation, constraints, and decisions.</span></p>
+      </article>
+      <article class="principle">
+        <h3><span class="zh">严谨因果推断</span><span class="en">Rigorous causal inference</span></h3>
+        <p><span class="zh">我们区分相关与因果，用实验与因果方法评估哪些因素真正影响结果。</span><span class="en">We distinguish correlation from causation, using experiments and causal methods to evaluate what truly affects outcomes.</span></p>
+      </article>
+      <article class="principle">
+        <h3><span class="zh">提高模型可解释性</span><span class="en">Improve interpretability</span></h3>
+        <p><span class="zh">模型输出应能被人类审查、追溯与修正。高风险场景不接受无法解释的黑箱结论。</span><span class="en">Model outputs should be reviewable, traceable, and correctable. High-stakes settings should not rely on unexplained black-box conclusions.</span></p>
+      </article>
+    </div>
+    <p class="principle-note reveal"><span class="zh">这三项，是我们所有工作的共同基础。</span><span class="en">These three principles are the foundation of everything we do.</span></p>
+  </div>
+</section>
+
+<!-- WORK: projects 1 & 2 -->
+<section class="section" id="work" data-nav-section>
+  <div class="container">
+    <div class="head reveal">
+      <div>
+        <span class="eyebrow"><span class="zh">我们在做什么</span><span class="en">What we are building</span></span>
+        <h2 class="title" style="margin-top:18px"><span class="zh">一套方法论，三条路径</span><span class="en">One methodology, three paths</span></h2>
+      </div>
+    </div>
+    <div class="proj-grid">
+      <article class="proj reveal">
+        <div class="proj-head">
+          <span class="proj-eye"><span class="zh">我们正聚焦的研究</span><span class="en">Current research focus</span></span>
+          <span class="pill live"><span class="zh">研究 · 已落地</span><span class="en">Research · Deployed</span></span>
+        </div>
+        <h3><span class="zh">高保真人类行为模拟</span><span class="en">High-fidelity behavior simulation</span></h3>
+        <p><span class="zh">我们基于自研算法，构建可控制、可复现的人类行为模拟环境。在企业端，已用于消费者决策研究、产品概念测试与营销策略预演；在高校与研究机构，可替代部分真人被试实验，降低成本并提升可复现性；在医疗场景，正探索患者行为预测与干预方案的预评估。</span><span class="en">Using our own algorithms, we build controllable, reproducible environments for simulating human behavior. In enterprise settings, deployed for consumer decision research, concept testing, and marketing strategy rehearsal; in universities and research institutions, partially replacing human participant studies to reduce cost and improve reproducibility; in healthcare, exploring patient behavior prediction and intervention pre-assessment.</span></p>
+        <div class="tags" style="margin-top:18px"><span class="tag"><span class="zh">消费者研究</span><span class="en">Consumer research</span></span><span class="tag"><span class="zh">概念测试</span><span class="en">Concept testing</span></span><span class="tag"><span class="zh">政策预演</span><span class="en">Policy rehearsal</span></span></div>
+        <div class="proj-meta"><span class="zh"><b>进展</b>　已与一家亚太区头部保险公司完成项目落地。</span><span class="en"><b>Progress</b>　Completed a project deployment with a leading Asia-Pacific insurer.</span></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-head">
+          <span class="proj-eye"><span class="zh">我们正在进行的工作</span><span class="en">Work in progress</span></span>
+          <span class="pill live"><span class="zh">开发与验证中</span><span class="en">In development</span></span>
+        </div>
+        <h3><span class="zh">AI × 心理健康</span><span class="en">AI × Mental Health</span></h3>
+        <p><span class="zh">我们正与医疗机构和高校研究团队合作，开发用于心理健康服务与研究流程的 AI 辅助系统。</span><span class="en">We work with medical institutions and university research teams to develop AI-assisted systems for mental health services and research workflows.</span></p>
+        <div class="preview" aria-hidden="true">
+          <div class="tags">
+            <span class="tag"><span class="zh">多智能体筛查与分级</span><span class="en">Multi-agent screening</span></span>
+            <span class="tag"><span class="zh">AI 辅助心理干预</span><span class="en">AI-assisted intervention</span></span>
+            <span class="tag"><span class="zh">督导与分析工具</span><span class="en">Supervision &amp; analysis</span></span>
+          </div>
+          <div class="stats">
+            <div class="stat"><b><span class="zh">9,500 万</span><span class="en">95M</span></b><span><span class="zh">心理问题人群</span><span class="en">people affected</span></span></div>
+            <div class="stat"><b><span class="zh">6.4 万</span><span class="en">64K</span></b><span><span class="zh">精神科医生</span><span class="en">psychiatrists</span></span></div>
+            <div class="stat"><b>&lt;10%</b><span><span class="zh">就诊率</span><span class="en">treatment rate</span></span></div>
+          </div>
+          <p class="insts"><span class="zh">合作与研究机构：浙大一院、湘雅二医院、浙江省精神卫生中心、西湖大学、香港科技大学等。</span><span class="en">Partner and research institutions include the First Affiliated Hospital of Zhejiang University, Second Xiangya Hospital, Zhejiang Mental Health Center, Westlake University, HKUST, and others.</span></p>
+        </div>
+      </article>
+
+      <article class="proj proj--future reveal">
+        <div class="proj-head">
+          <span class="proj-eye"><span class="zh">我们的长期方向</span><span class="en">Our long-term direction</span></span>
+          <span class="pill"><span class="zh">持续研究中</span><span class="en">Ongoing research</span></span>
+        </div>
+        <h3><span class="zh">从行为模拟，到 Agent 治理</span><span class="en">From behavior simulation to agent governance</span></h3>
+        <p><span class="zh">模拟人类行为只是起点。AI 正越来越多地参与判断与决策。我们研究如何评估这些系统的行为、解释其决策依据，并建立能够被人类审查和约束的评测框架。</span><span class="en">Simulating human behavior is only the beginning. As AI increasingly participates in judgment and decision-making, we study how to evaluate its behavior, explain its reasoning, and build frameworks that people can review and constrain.</span></p>
+        <div class="trust-inline" aria-hidden="true">
+          <div><div class="metric-row"><b><span class="zh">可解释</span><span class="en">Explainable</span></b><span>88</span></div><div class="bar"><i style="width:88%"></i></div></div>
+          <div><div class="metric-row"><b><span class="zh">可审查</span><span class="en">Reviewable</span></b><span>76</span></div><div class="bar"><i style="width:76%"></i></div></div>
+          <div><div class="metric-row"><b><span class="zh">可约束</span><span class="en">Controllable</span></b><span>92</span></div><div class="bar"><i style="width:92%"></i></div></div>
+        </div>
+        <div class="proj-meta"><span class="zh"><b>长期目标</b>　建立 Agent 经济时代的行为可信度评测体系，并推动相关标准形成。</span><span class="en"><b>Long-term goal</b>　Build an evaluation system for behavioral trustworthiness in the agent economy, and contribute to related standards.</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH --><!-- RESEARCH -->
+<section class="section section--warm" id="research">
+  <div class="container">
+    <div class="head reveal">
+      <div>
+        <span class="eyebrow"><span class="zh">研究与进展</span><span class="en">Research &amp; progress</span></span>
+        <h2 class="title" style="margin-top:18px"><span class="zh">研究</span><span class="en">Research</span></h2>
+        <p class="title-desc"><span class="zh">我们只公开已经发生、可以核验并获得授权的信息。</span><span class="en">We publish only work that has happened, can be verified, and has been authorized for release.</span></p>
+      </div>
+    </div>
+    <div class="research-shell reveal">
+      <div class="research-tools">
+        <span class="research-counter"><b id="research-current">01</b> / <span id="research-total">08</span></span>
+        <div class="research-arrows">
+          <button class="arrow-btn" id="research-prev" type="button" aria-label="Previous">←</button>
+          <button class="arrow-btn" id="research-next" type="button" aria-label="Next">→</button>
+        </div>
+      </div>
+      <div class="research-viewport" id="research-viewport">
+        <div class="research-track" id="research-track">
+      <article class="rcard"><span class="pill live"><span class="zh">已发表</span><span class="en">Published</span></span><h3><span class="zh">人类行为模拟的评测基准与方法</span><span class="en">Benchmarks &amp; methods for behavior simulation</span></h3><p><span class="zh">建立用于度量模拟行为质量的评测方法与技术基础。</span><span class="en">Evaluation methods and technical foundations for measuring the quality of simulated behavior.</span></p><div class="rfoot"><span><span class="zh">链接待补</span><span class="en">Link pending</span></span></div></article>
+      <article class="rcard"><span class="pill live"><span class="zh">已发表</span><span class="en">Published</span></span><h3>LLMs as causal world models</h3><p><span class="zh">研究大模型作为因果世界模型进行推理的能力。</span><span class="en">Studying how large models can reason as causal world models.</span></p><div class="rfoot"><span><span class="zh">链接待补</span><span class="en">Link pending</span></span></div></article>
+      <a class="rcard" href="https://journals.sagepub.com/doi/abs/10.1177/00222437211044472" target="_blank" rel="noopener"><span class="pill live"><span class="zh">已发表 · JMR</span><span class="en">Published · JMR</span></span><h3><span class="zh">消费者行为量化研究</span><span class="en">Quantitative consumer behavior research</span></h3><p><span class="zh">用量化模型研究消费者的判断与决策机制。</span><span class="en">Using quantitative models to study consumer judgment and decision-making.</span></p><div class="rfoot"><span></span><span class="plink"><span class="zh">查看论文</span><span class="en">View paper</span><span class="arw">↗</span></span></div></a>
+      <a class="rcard" href="https://arxiv.org/abs/2305.00450" target="_blank" rel="noopener"><span class="pill live"><span class="zh">已公开 · arXiv</span><span class="en">Public · arXiv</span></span><h3><span class="zh">AI 与心理及精神医学交叉</span><span class="en">AI × psychology and psychiatry</span></h3><p><span class="zh">研究面向心理健康场景的对话系统与算法方法。</span><span class="en">Dialogue systems and algorithmic methods for mental health settings.</span></p><div class="rfoot"><span></span><span class="plink"><span class="zh">查看论文</span><span class="en">View paper</span><span class="arw">↗</span></span></div></a>
+      <article class="rcard"><span class="pill"><span class="zh">进行中</span><span class="en">Ongoing</span></span><h3><span class="zh">多智能体心理健康筛查分级</span><span class="en">Multi-agent screening &amp; triage</span></h3><p><span class="zh">研究大规模筛查、风险分级与转介方法。</span><span class="en">Methods for large-scale screening, risk stratification, and referral.</span></p><div class="rfoot"><span><span class="zh">研究中</span><span class="en">In research</span></span></div></article>
+      <article class="rcard"><span class="pill"><span class="zh">进行中</span><span class="en">Ongoing</span></span><h3><span class="zh">AI 督导师 · 结构化督导</span><span class="en">AI supervisor · structured supervision</span></h3><p><span class="zh">研究如何提高督导资源与初级咨询师之间的匹配效率。</span><span class="en">Improving how supervision resources are matched with junior counselors.</span></p><div class="rfoot"><span><span class="zh">研究中</span><span class="en">In research</span></span></div></article>
+      <article class="rcard"><span class="pill"><span class="zh">进行中</span><span class="en">Ongoing</span></span><h3><span class="zh">面向 Agent 经济的行为可信度评测</span><span class="en">Trustworthiness eval for the agent economy</span></h3><p><span class="zh">研究 Agent 行为可信度的评测方法与相关标准。</span><span class="en">Evaluation methods and related standards for agent behavioral trustworthiness.</span></p><div class="rfoot"><span><span class="zh">研究中</span><span class="en">In research</span></span></div></article>
+      <article class="rcard"><span class="pill"><span class="zh">持续更新</span><span class="en">Updating</span></span><h3><span class="zh">更多研究正在进行</span><span class="en">More research underway</span></h3><p><span class="zh">新的公开成果将在完成核验与授权后更新。</span><span class="en">New public work will be added after verification and authorization.</span></p><div class="rfoot"><span><span class="zh">持续更新</span><span class="en">Ongoing updates</span></span></div></article>
+        </div>
+      </div>
+      <div class="research-progress" aria-hidden="true"><i id="research-progress"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM + CONTACT (integrated) -->
+<section class="section" id="team" data-nav-section>
+  <div class="container">
+    <div class="head reveal">
+      <div>
+        <span class="eyebrow"><span class="zh">团队与联系</span><span class="en">Team &amp; contact</span></span>
+        <h2 class="title" style="margin-top:18px"><span class="zh">与我们同行</span><span class="en">Work with us</span></h2>
+      </div>
+    </div>
+    <div class="team-wrap reveal">
+      <div class="team-body">
+        <div class="team-cols">
+          <div class="team-col">
+        <h3><span class="zh">团队背景</span><span class="en">Background</span></h3>
+        <p><span class="zh">核心团队来自 CMU、Google AI、香港科技大学、清华大学、浙江大学、西湖大学等高校，以及字节跳动、华为、大疆等科技企业，具备计算机科学、心理学与行为经济学交叉背景。</span><span class="en">The core team comes from CMU, Google AI, HKUST, Tsinghua, Zhejiang University, and Westlake University, as well as ByteDance, Huawei, and DJI, with interdisciplinary backgrounds spanning computer science, psychology, and behavioral economics.</span></p>
+      </div>
+          <div class="team-col">
+        <h3><span class="zh">研究与临床</span><span class="en">Research &amp; clinical</span></h3>
+        <p><span class="zh">研究方向覆盖因果推断、大模型对齐、多智能体系统与 AI 辅助心理干预。相关工作发表于 Marketing Science、JMR、ISR 等顶级期刊及 ACL、NeurIPS 等 AI 会议；临床研究由浙大一院、湘雅二医院精神卫生科主任医师担任专业顾问。</span><span class="en">Research spans causal inference, large-model alignment, multi-agent systems, and AI-assisted mental health intervention. Work appears in Marketing Science, JMR, ISR, and at ACL, NeurIPS, and other AI venues; clinical research is advised by chief psychiatrists at the First Affiliated Hospital of Zhejiang University and Second Xiangya Hospital.</span></p>
+      </div>
+        </div>
+        <p class="hiring"><span class="zh">理解人，是 AI 走向可信的第一步。</span><span class="en">Understanding people is the first step toward trustworthy AI.</span></p>
+      </div>
+      <aside class="contact-card">
+        <div>
+          <p class="contact-quote"><span class="zh">我们正在招募研究人员、算法工程师，以及产品、设计、开发和运营人才。部分岗位支持兼职与远程协作，线下协作主要分布在香港、深圳、杭州和上海。</span><span class="en">We are hiring researchers, algorithm engineers, and people in product, design, engineering, and operations. Some roles support part-time and remote collaboration, with in-person collaboration mainly in Hong Kong, Shenzhen, Hangzhou, and Shanghai.</span></p>
+          <p class="contact-sub"><span class="zh">如需开展研究或产品合作、了解投资机会或加入团队，请联系我们。</span><span class="en">For research or product collaboration, investment opportunities, or joining the team, get in touch.</span></p>
+        </div>
+        <a class="mail" href="mailto:kayrashuai1900@gmail.com"><span>kayrashuai1900@gmail.com</span><span>↗</span></a>
+      </aside>
+    </div>
+    <div class="site-foot reveal">
+      <a class="brand" href="#top" aria-label="Cormira">
+        <svg class="mark" viewBox="0 0 32 32" aria-hidden="true" style="width:18px;height:18px">
+        <path d="M25.4 9.4 A11.5 11.5 0 1 0 25.4 22.6" fill="none" stroke="var(--ink)" stroke-width="1.9" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="3.6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="1.4" fill="var(--ink)"/>
+        <circle cx="25.4" cy="16" r="2.6" fill="var(--accent)"/>
+      </svg>
+        <strong><span class="zh">© 2026 扶光心舍 / CORMIRA</span><span class="en">© 2026 Cormira</span></strong>
+      </a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="zh" class="active">中</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+(() => {
+  const root=document.documentElement;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // language toggle
+  const langButtons=[...document.querySelectorAll('.lang button[data-lang]')];
+  const setLang=lang=>{
+    root.dataset.lang=lang;root.lang=lang==='zh'?'zh-CN':'en';
+    langButtons.forEach(b=>{const a=b.dataset.lang===lang;b.classList.toggle('active',a);b.setAttribute('aria-pressed',String(a))});
+    document.title=lang==='zh'?'扶光心舍 / Cormira · AI 行为科学':'Cormira · AI for Behavioral Science';
+    try{localStorage.setItem('cormira-lang',lang)}catch(e){}
+  };
+  let saved='zh';try{saved=localStorage.getItem('cormira-lang')||'zh'}catch(e){}
+  setLang(saved==='en'?'en':'zh');
+  langButtons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+
+  // mobile menu
+  const menu=document.getElementById('menu'),nav=document.getElementById('nav-links');
+  menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open)});
+  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.setAttribute('aria-expanded','false');nav.classList.remove('open')}));
+
+  // reveal on scroll
+  const reveals=document.querySelectorAll('.reveal');
+  if(reduce||!('IntersectionObserver'in window)){reveals.forEach(el=>el.classList.add('in'))}
+  else{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -40px'});reveals.forEach(el=>io.observe(el))}
+
+  // scroll-spy
+  const secs=[...document.querySelectorAll('[data-nav-section]')],links=[...document.querySelectorAll('.nav-links a[data-section]')];
+  if('IntersectionObserver'in window){
+    const nio=new IntersectionObserver(es=>{const v=es.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(v)links.forEach(a=>a.setAttribute('aria-current',String(a.dataset.section===v.target.id)))},{threshold:[.15,.4,.7],rootMargin:'-64px 0px -45%'});
+    secs.forEach(s=>nio.observe(s));
+  }
+
+  // research carousel — width-constrained viewport, horizontal scroll
+  const rtrack=document.getElementById('research-track');
+  if(rtrack){
+    const rview=document.getElementById('research-viewport'),
+          rcards=[...rtrack.children],
+          rprev=document.getElementById('research-prev'),
+          rnext=document.getElementById('research-next'),
+          rcur=document.getElementById('research-current'),
+          rtot=document.getElementById('research-total'),
+          rprog=document.getElementById('research-progress');
+    let ri=0,rvis=3,rtimer=0,rtx=0;
+    const rrender=(anim=true)=>{const gap=18,w=rcards[0].getBoundingClientRect().width;rtrack.style.transition=anim?'transform .55s cubic-bezier(.2,.7,.2,1)':'none';rtrack.style.transform=`translate3d(${-ri*(w+gap)}px,0,0)`;rcur.textContent=String(ri+1).padStart(2,'0');rtot.textContent=String(rcards.length).padStart(2,'0');const max=Math.max(1,rcards.length-rvis);rprog.style.transform=`translateX(${ri/max*400}%)`};
+    const rcalc=()=>{rvis=innerWidth<=600?1:innerWidth<=1024?2:3;ri=Math.min(ri,Math.max(0,rcards.length-rvis));rrender(false)};
+    const rrestart=()=>{clearInterval(rtimer);if(!reduce)rtimer=setInterval(()=>rgo(1),3200)};
+    const rgo=d=>{const max=Math.max(0,rcards.length-rvis);ri+=d;if(ri>max)ri=0;if(ri<0)ri=max;rrender(true);rrestart()};
+    rprev.addEventListener('click',()=>rgo(-1));
+    rnext.addEventListener('click',()=>rgo(1));
+    rview.addEventListener('mouseenter',()=>clearInterval(rtimer));
+    rview.addEventListener('mouseleave',rrestart);
+    rview.addEventListener('focusin',()=>clearInterval(rtimer));
+    rview.addEventListener('focusout',rrestart);
+    rview.addEventListener('touchstart',e=>{rtx=e.touches[0].clientX;clearInterval(rtimer)},{passive:true});
+    rview.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-rtx;if(Math.abs(dx)>40)rgo(dx<0?1:-1);else rrestart()},{passive:true});
+    addEventListener('resize',rcalc);
+    rcalc();rrestart();
+  }
+})();
+</script>
+</body>
+</html>
