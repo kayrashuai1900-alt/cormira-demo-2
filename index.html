@@ -1,6 +1,7 @@
 <!doctype html>
-<html lang="zh-CN" data-lang="zh">
+<html lang="zh-Hant" data-lang="tw">
 <head>
+<script>(function(){try{var l=localStorage.getItem('cormira-lang');if(['tw','zh','en'].indexOf(l)<0)l='tw';var d=document.documentElement;d.setAttribute('data-lang',l);d.lang=l==='en'?'en':(l==='tw'?'zh-Hant':'zh-CN');}catch(e){}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7f4ef">
@@ -47,7 +48,7 @@
   --serif:"Newsreader","Noto Serif SC","Songti SC","STSong",serif;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:78px;-webkit-text-size-adjust:100%;background:var(--bg)}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory;scroll-padding-top:64px;-webkit-text-size-adjust:100%;background:var(--bg)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.65;font-weight:400;letter-spacing:-.003em;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer}
@@ -56,8 +57,9 @@ svg{display:block}
 ::selection{background:rgba(156,43,36,.2)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 .container{width:min(100%,var(--container));margin-inline:auto;padding-inline:var(--gutter)}
-html[data-lang="zh"] .en{display:none}
-html[data-lang="en"] .zh{display:none}
+html[data-lang="tw"] .zh,html[data-lang="tw"] .en{display:none}
+html[data-lang="zh"] .tw,html[data-lang="zh"] .en{display:none}
+html[data-lang="en"] .tw,html[data-lang="en"] .zh{display:none}
 
 /* ---------- shared atoms ---------- */
 .eyebrow{display:inline-flex;align-items:center;gap:11px;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);line-height:1}
@@ -74,6 +76,7 @@ html[data-lang="en"] .zh{display:none}
 .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line-2)}
 .nav-row{height:64px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}
 .brand{display:inline-flex;align-items:center;gap:10px;width:max-content;font-weight:600;letter-spacing:.01em;font-size:15px}
+.nav .brand{color:var(--accent);font-weight:700}
 .nav-links{display:flex;align-items:center;gap:34px;font-size:14px;color:var(--ink-2)}
 .nav-links a{position:relative;padding:22px 0;transition:color .16s}
 .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:18px;height:1.5px;background:var(--accent);transition:right .2s ease}
@@ -81,8 +84,9 @@ html[data-lang="en"] .zh{display:none}
 .nav-links a[aria-current="true"]::after{right:0}
 .nav-actions{justify-self:end;display:none;align-items:center;gap:12px}
 .lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
-.lang button{min-width:40px;border:0;background:transparent;padding:6px 11px;color:var(--ink-3);font-size:12px;font-weight:500}
-.lang button.active{background:var(--ink);color:var(--bg)}
+.lang button{min-width:40px;border:0;background:transparent;padding:6px 11px;color:var(--ink);font-size:12px;font-weight:500;cursor:pointer;transition:color .15s,background .15s}
+.lang button:hover{color:var(--accent)}
+.lang button.active{background:#fff;color:var(--accent);font-weight:600}
 .menu{display:none;border:0;background:transparent;width:38px;height:38px;position:relative}
 .menu span,.menu::before,.menu::after{content:"";position:absolute;left:9px;width:20px;height:1.5px;background:var(--ink);transition:.2s ease}
 .menu span{top:18.5px}.menu::before{top:13px}.menu::after{top:24px}
@@ -95,73 +99,55 @@ html[data-lang="en"] .zh{display:none}
 .reveal.in{opacity:1;transform:none}
 
 /* ---------- sections ---------- */
-.section{padding-block:clamp(84px,9.5vw,168px);background:var(--bg)}
+.section{min-height:calc(100svh - 64px);display:flex;flex-direction:column;justify-content:center;align-items:center;scroll-snap-align:start;scroll-snap-stop:always;padding-top:clamp(72px,8vh,96px);padding-bottom:clamp(36px,4.5vh,64px);background:var(--bg)}
 .section--warm{background:var(--bg-2)}
-.head{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:clamp(48px,5.5vw,76px)}
-.head-bar{width:48px;height:4px;background:var(--accent);border-radius:2px;margin-top:24px}
+.head{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:clamp(22px,3vh,40px)}
+#team .head{margin-bottom:clamp(36px,4.5vh,52px)}
+.head-bar{width:48px;height:4px;background:var(--accent);border-radius:2px;margin-top:-3px;transform:translateY(-15px)}
 .title{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4.5vw,54px);line-height:1.08;letter-spacing:-.022em}
-.title-desc{margin-top:18px;color:var(--ink-2);font-size:17px;max-width:54ch;line-height:1.6;margin-inline:auto}
+.title-desc{margin-top:18px;color:var(--ink-2);font-size:17px;max-width:none;line-height:1.55;margin-inline:auto;transform:translateY(-15px);text-align:justify;text-align-last:left}
 
 /* ---------- hero ---------- */
-.hero{min-height:100svh;display:flex;align-items:center;padding-top:clamp(80px,10vh,120px);padding-bottom:clamp(60px,8vw,100px)}
+.hero{min-height:100svh;display:flex;align-items:center;scroll-snap-align:start;scroll-snap-stop:always;padding-top:clamp(72px,9vh,104px);padding-bottom:clamp(40px,5vh,76px)}
 .hero-grid{display:flex;flex-direction:column;align-items:center;text-align:center}
 .hero-copy{display:flex;flex-direction:column;align-items:center;max-width:52rem}
-.hero-bar{width:48px;height:4px;background:var(--accent);border-radius:2px;margin-top:28px}
-.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(44px,7vw,86px);line-height:1.06;letter-spacing:-.025em;color:var(--accent)}
-.hero-lead{margin-top:32px;max-width:56ch;font-size:clamp(17px,1.5vw,19.5px);color:var(--ink-2);line-height:1.65}
-.hero-actions{display:flex;gap:30px;flex-wrap:wrap;margin-top:44px;justify-content:center}
+.hero-bar{width:48px;height:4px;background:var(--accent);border-radius:2px;margin-top:12px;transform:translateY(-15px)}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(44px,7vw,86px);line-height:1.06;letter-spacing:-.025em;color:var(--accent);transform:translateY(-15px)}
+.hero-lead{margin-top:18px;max-width:56ch;font-size:clamp(17px,1.5vw,19.5px);color:var(--ink-2);line-height:1.65;text-align:justify;text-align-last:left}
+.hero-actions{display:flex;gap:30px;flex-wrap:wrap;margin-top:34px;justify-content:center}
 
 /* ---------- projects ---------- */
-.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
-.proj{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:clamp(26px,3vw,38px);display:flex;flex-direction:column;transition:border-color .18s}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.proj{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column;transition:border-color .18s}
 .proj:hover{border-color:var(--accent)}
 .proj-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:8px}
 .proj-eye{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);line-height:1.4}
-.proj h3{font-family:var(--serif);font-weight:500;font-size:clamp(25px,2.7vw,33px);line-height:1.12;letter-spacing:-.02em;margin:20px 0 14px}
-.proj p{font-size:15px;color:var(--ink-2);line-height:1.7;max-width:60ch}
-.proj .tags{margin-top:auto;padding-top:20px}
-.proj-meta{margin-top:auto;padding-top:22px;border-top:1px solid var(--line-2);font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.proj h3{font-family:var(--serif);font-weight:500;font-size:clamp(25px,2.7vw,33px);line-height:1.12;letter-spacing:-.02em;margin:12px 0 10px}
+.proj p{font-size:15px;color:var(--ink-2);line-height:1.62;text-align:justify;text-align-last:left}
+.proj p+p{margin-top:13px}
+.proj .tags{margin-bottom:16px}
+.proj-meta{margin-top:auto;padding-top:20px;border-top:1px solid var(--line-2);font-size:13.5px;color:var(--ink-2);line-height:1.55}
 .proj-meta b{color:var(--ink);font-weight:600}
 /* card maturity — title-only differentiation */
 .proj--future h3{color:var(--ink-2)}
 /* tags + stats inside project cards */
-.tags{display:flex;flex-wrap:wrap;gap:8px}
-.tag{font-size:12px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2)}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{font-size:10px;font-weight:500;white-space:nowrap;padding:4px 8px;border-radius:999px;color:rgba(156,43,36,.9);background:rgba(156,43,36,.07)}
 
-/* ---------- research carousel (width-constrained, horizontal scroll) ---------- */
-.research-shell{position:relative;border-top:1px solid var(--line);padding-top:38px}
-.research-tools{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px}
-.research-counter{font-size:13px;color:var(--ink-3);font-variant-numeric:tabular-nums;letter-spacing:.02em}
-.research-counter b{color:var(--ink);font-weight:600}
-.research-arrows{display:flex;gap:8px}
-.arrow-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:17px;display:grid;place-items:center;transition:border-color .16s,color .16s}
-.arrow-btn:hover{border-color:var(--accent);color:var(--accent)}
-.research-viewport{overflow:hidden}
-.research-track{display:flex;gap:18px;will-change:transform}
-.rcard{flex:0 0 calc((100% - 36px)/3);min-width:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:24px 23px;display:flex;flex-direction:column;min-height:236px;transition:border-color .18s}
-.research-progress{height:2px;background:var(--line-2);margin-top:26px;overflow:hidden}
-.research-progress i{display:block;height:100%;width:20%;background:var(--accent);transition:transform .55s cubic-bezier(.2,.7,.2,1)}
-.rcard:hover{border-color:var(--plum)}
-.rcard h3{font-size:17px;font-weight:600;line-height:1.4;margin:18px 0 9px;letter-spacing:-.008em;overflow-wrap:anywhere}
-.rcard p{font-size:13.5px;color:var(--ink-2);line-height:1.62;flex:1}
-.rfoot{margin-top:20px;padding-top:14px;border-top:1px solid var(--line-2);display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--ink-3);font-size:12px}
-.plink{color:var(--plum);font-weight:600;display:inline-flex;gap:5px;align-items:center}
-.plink .arw{transition:transform .18s}
-.rcard:hover .plink .arw{transform:translate(2px,-2px)}
-
-/* ---------- team + contact (integrated) ---------- */
+/* ---------- team + contact ---------- */
 .team-wrap{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(30px,4vw,60px);align-items:stretch}
 .team-body{display:flex;flex-direction:column}
-.team-cols{display:grid;grid-template-columns:1fr 1fr;gap:34px clamp(28px,3vw,48px)}
-.team-col h3{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
-.team-col p{font-size:15px;color:var(--ink-2);line-height:1.78}
-.hiring{margin-top:auto;padding-top:32px;border-top:1px solid var(--line);font-family:var(--serif);font-style:italic;font-size:clamp(18px,2vw,22px);color:var(--ink);line-height:1.5;letter-spacing:-.01em;max-width:70ch}
-.contact-card{background:var(--dark);color:var(--on-dark);border-radius:var(--radius);padding:clamp(30px,3.4vw,44px);display:flex;flex-direction:column;justify-content:space-between;gap:34px}
-.contact-quote{font-family:var(--sans);font-weight:400;font-size:15.5px;line-height:1.7;color:var(--on-dark-2)}
-.contact-sub{margin-top:18px;color:var(--on-dark-2);font-size:15px;line-height:1.62}
+.team-single{display:flex;flex-direction:column;gap:20px}
+.team-single h3{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.team-single p{font-size:15px;color:var(--ink-2);line-height:1.66;text-align:justify;text-align-last:left}
+.hiring{margin-top:auto;padding-top:clamp(28px,4vh,48px);font-family:var(--serif);font-size:clamp(18px,2vw,22px);color:var(--ink);line-height:1.4;letter-spacing:-.01em;max-width:70ch}
+.contact-card{background:var(--dark);color:var(--on-dark);border-radius:var(--radius);padding:clamp(30px,3.4vw,44px);display:flex;flex-direction:column;justify-content:space-between;gap:26px}
+.contact-fields{display:flex;flex-direction:column;gap:22px}
+.cfield-label{display:block;font-size:15.5px;line-height:1.7;color:var(--on-dark-2)}
+.cfield p{margin-top:2px;font-size:13.5px;line-height:1.62;color:rgba(247,244,239,.5);text-align:justify;text-align-last:left}
 .mail{display:inline-flex;align-items:center;justify-content:space-between;gap:14px;width:100%;padding:16px 20px;border-radius:var(--radius);background:var(--accent);color:#f9efeb;font-size:15px;font-weight:600;transition:background .18s}
 .mail:hover{background:#b1392f}
-.site-foot{border-top:1px solid var(--line);margin-top:clamp(54px,7vw,92px);padding-top:26px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--ink-3);font-size:12.5px}
+.site-foot{border-top:1px solid var(--line);margin-top:clamp(48px,6vh,84px);padding-top:24px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--ink-3);font-size:12.5px}
 .site-foot .brand{color:var(--ink-2);font-weight:600}
 .site-foot strong{color:var(--ink-2);font-weight:600}
 
@@ -181,10 +167,18 @@ html[data-lang="en"] .zh{display:none}
   .menu{display:block}
   .head{margin-bottom:clamp(36px,5vw,56px)}
   .proj-grid{grid-template-columns:1fr}
+  html{scroll-snap-type:none}
+  .hero,.section{scroll-snap-align:none}
+  .section{min-height:0;display:block;padding-block:clamp(60px,11vw,84px)}
 }
 @media(max-width:600px){
   .rcard{flex-basis:85%}
-  .team-cols{grid-template-columns:1fr}
+  
+}
+@media(max-height:760px){
+  html{scroll-snap-type:none}
+  .hero,.section{scroll-snap-align:none;min-height:auto}
+  .section{display:block}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -197,12 +191,12 @@ html[data-lang="en"] .zh{display:none}
 <header class="nav">
   <div class="container nav-row">
     <a class="brand" href="#top" aria-label="Cormira">
-      <span class="zh">扶光心舍</span><span class="en">Cormira</span>
+      <span class="zh">扶光心舍｜Cormira</span><span class="tw">扶光心舍｜Cormira</span><span class="en">Cormira</span>
     </a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
-      <a href="#overview" data-section="overview"><span class="zh">概览</span><span class="en">Overview</span></a>
-      <a href="#work" data-section="work"><span class="zh">产品与研究</span><span class="en">Products &amp; Research</span></a>
-      <a href="#team" data-section="team"><span class="zh">团队与联系</span><span class="en">Team &amp; Contact</span></a>
+      <a href="#overview" data-section="overview"><span class="zh">概览</span><span class="tw">概覽</span><span class="en">Overview</span></a>
+      <a href="#work" data-section="work"><span class="zh">产品与研究</span><span class="tw">產品與研究</span><span class="en">Products &amp; Research</span></a>
+      <a href="#team" data-section="team"><span class="zh">团队与联系</span><span class="tw">團隊與聯繫</span><span class="en">Team &amp; Contact</span></a>
     </nav>
     <div class="nav-actions">
       <button class="menu" id="menu" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span></button>
@@ -215,12 +209,12 @@ html[data-lang="en"] .zh{display:none}
 <section class="hero" id="overview" data-nav-section>
   <div class="container hero-grid">
     <div class="hero-copy reveal">
-      <h1><span class="zh">让 AI 照见人心</span><span class="en">Let AI understand human behavior</span></h1>
+      <h1><span class="zh">让 AI 照见人心</span><span class="tw">讓 AI 照見人心</span><span class="en">Let AI understand human behavior</span></h1>
       <div class="hero-bar" aria-hidden="true"></div>
-      <p class="hero-lead"><span class="zh">Cormira（扶光心舍）致力于研究人与 AI 的行为及决策，以预测、模拟、可解释建模为核心，用科研驱动产业智能。我们与高校、医疗机构及企业合作，将行为科学方法应用于心理健康、消费者研究与智能体治理领域。</span><span class="en">Cormira studies human and AI behavior and decision-making, with prediction, simulation, and interpretable modeling at its core. We partner with universities, medical institutions, and enterprises to apply behavioral science methods to mental health, consumer research, and agent governance.</span></p>
+      <p class="hero-lead"><span class="zh">扶光心舍（Cormira）致力于研究人与 AI 的行为及决策，<br>以预测、模拟、可解释建模为核心，用科研驱动产业智能。</span><span class="tw">扶光心舍（Cormira）致力於研究人與 AI 的行為及決策，<br>以預測、模擬、可解釋建模為核心，用科研驅動產業智能。</span><span class="en">Cormira studies human and AI behavior and decision-making,<br>centered on prediction, simulation, and interpretable modeling — driving applied intelligence through research.</span></p>
       <div class="hero-actions">
-        <a class="tlink" href="#work"><span class="zh">查看我们的工作</span><span class="en">Explore our work</span><span class="arw">→</span></a>
-        <a class="tlink" href="#research"><span class="zh">阅读研究成果</span><span class="en">Read our research</span><span class="arw">→</span></a>
+        <a class="tlink" href="#work"><span class="zh">查看我们的工作</span><span class="tw">查看我們的工作</span><span class="en">Explore our work</span><span class="arw">→</span></a>
+        <a class="tlink" href="#team"><span class="zh">联系我们</span><span class="tw">聯繫我們</span><span class="en">Contact us</span><span class="arw">→</span></a>
       </div>
     </div>
     
@@ -232,113 +226,83 @@ html[data-lang="en"] .zh{display:none}
 <section class="section section--warm" id="work" data-nav-section>
   <div class="container">
     <div class="head reveal">
-      <h2 class="title"><span class="zh">用一套方法论，走三条路径</span><span class="en">One methodology, three paths</span></h2>
+      <h2 class="title" style="transform:translateY(-30px)"><span class="zh">从理解人的行为，到评估 AI 的行为</span><span class="tw">從理解人的行為，到評估 AI 的行為</span><span class="en">From understanding human behavior to evaluating AI behavior</span></h2>
       <div class="head-bar" aria-hidden="true"></div>
+      <p class="title-desc"><span class="zh">我们围绕行为的模拟、测量与解释开展研究，并将相关方法应用于心理健康服务和智能体行为治理</span><span class="tw">我們圍繞行為的模擬、測量與解釋開展研究，並將相關方法應用於心理健康服務和智能體行為治理</span><span class="en">We study the simulation, measurement, and interpretation of behavior,<br>and apply the same methods to mental health services and agent behavior governance.</span></p>
     </div>
     <div class="proj-grid">
       <article class="proj reveal">
         <div class="proj-head">
-          <span class="proj-eye"><span class="zh">我们正聚焦的研究</span><span class="en">Current research focus</span></span>
-          <span class="pill live"><span class="zh">研究 · 已落地</span><span class="en">Research · Deployed</span></span>
+          <span class="proj-eye"><span class="zh">当前聚焦的研究</span><span class="tw">當前聚焦的研究</span><span class="en">Current research focus</span></span>
+          <span class="pill live"><span class="zh">项目已落地</span><span class="tw">項目已落地</span><span class="en">Deployed</span></span>
         </div>
-        <h3><span class="zh">行为模拟</span><span class="en">Behavior Simulation</span></h3>
-        <p><span class="zh">团队基于自研算法，构建可控制、可复现的人类行为模拟环境。它已用于消费者决策研究、产品概念测试与营销策略预演，也可替代部分真人被试实验，降低科研成本、提升可复现性。</span><span class="en">The team builds controllable, reproducible environments for simulating human behavior using proprietary algorithms. Deployed for consumer decision research, concept testing, and marketing strategy rehearsal, it can also replace some human participant studies, reducing research costs and improving reproducibility.</span></p>
-        <div class="tags"><span class="tag"><span class="zh">消费者研究</span><span class="en">Consumer research</span></span><span class="tag"><span class="zh">概念测试</span><span class="en">Concept testing</span></span><span class="tag"><span class="zh">政策预演</span><span class="en">Policy rehearsal</span></span></div>
-        <div class="proj-meta"><span class="zh"><b>进展</b>　已与一家亚太区头部保险公司完成项目落地。</span><span class="en"><b>Progress</b>　Completed a project deployment with a leading Asia-Pacific insurer.</span></div>
+        <h3><span class="zh">高保真行为模拟</span><span class="tw">高保真行為模擬</span><span class="en">High-fidelity Behavior Simulation</span></h3>
+        <div class="tags"><span class="tag"><span class="zh">消费者研究</span><span class="tw">消費者研究</span><span class="en">Consumer research</span></span><span class="tag"><span class="zh">概念测试</span><span class="tw">概念測試</span><span class="en">Concept testing</span></span><span class="tag"><span class="zh">预演模拟策略</span><span class="tw">預演模擬策略</span><span class="en">Strategy rehearsal</span></span></div>
+        <p><span class="zh">团队基于自研算法，构建可控制、可复现的人类行为模拟环境，用于消费者决策研究、产品概念测试与群体推演。</span><span class="tw">團隊基於自研算法，構建可控制、可復現的人類行為模擬環境，用於消費者決策研究、產品概念測試與羣體推演。</span><span class="en">Using proprietary algorithms, the team builds controllable, reproducible environments for simulating human behavior, applied to consumer decision research, product concept testing, and population-level rehearsal.</span></p>
+        <p><span class="zh">在适用场景下，行为模拟可作为真人实验的补充，降低样本成本、提升研究效率，并增强结果的可复现性。</span><span class="tw">在適用場景下，行為模擬可作為真人實驗的補充，降低樣本成本、提升研究效率，並增強結果的可復現性。</span><span class="en">Where appropriate, behavior simulation can complement human-subject studies, lowering sample costs, improving research efficiency, and strengthening reproducibility.</span></p>
+        <div class="proj-meta"><span class="zh"><b>进展</b>　已与一家亚太区头部保险公司完成项目落地，并持续迭代优化。</span><span class="tw"><b>進展</b>　已與一家亞太區頭部保險公司完成項目落地，並持續迭代優化。</span><span class="en"><b>Progress</b>　Completed a project deployment with a leading Asia-Pacific insurer, with ongoing iteration.</span></div>
       </article>
 
       <article class="proj reveal">
         <div class="proj-head">
-          <span class="proj-eye"><span class="zh">我们正在构建的产品</span><span class="en">Product in development</span></span>
-          <span class="pill live"><span class="zh">开发与验证中</span><span class="en">In development</span></span>
+          <span class="proj-eye"><span class="zh">正在构建的产品</span><span class="tw">正在構建的產品</span><span class="en">Product in development</span></span>
+          <span class="pill live"><span class="zh">开发验证中</span><span class="tw">開發驗證中</span><span class="en">In development</span></span>
         </div>
-        <h3><span class="zh">AI × 心理健康</span><span class="en">AI × Mental Health</span></h3>
-        <p><span class="zh">Cormira 与医疗机构和高校研究团队合作，开发面向心理健康服务与研究流程的 AI 辅助系统，涵盖多智能体筛查与分级、AI 辅助干预，以及督导与分析工具。</span><span class="en">Cormira partners with medical institutions and university research teams to develop AI-assisted systems for mental health services and research workflows, spanning multi-agent screening and triage, AI-assisted intervention, and supervision and analysis tools.</span></p>
-        <div class="tags"><span class="tag"><span class="zh">多智能体筛查与分级</span><span class="en">Multi-agent screening</span></span><span class="tag"><span class="zh">AI 辅助心理干预</span><span class="en">AI-assisted intervention</span></span><span class="tag"><span class="zh">督导与分析工具</span><span class="en">Supervision &amp; analysis</span></span></div>
-        <div class="proj-meta"><span class="zh"><b>合作机构</b>　浙大一院、湘雅二医院、浙江省精神卫生中心、西湖大学、香港科技大学等。</span><span class="en"><b>Partners</b>　First Affiliated Hospital of Zhejiang University, Second Xiangya Hospital, Zhejiang Mental Health Center, Westlake University, HKUST, and others.</span></div>
+        <h3><span class="zh">行为智能与心理</span><span class="tw">行為智能與心理</span><span class="en">Behavioral Intelligence × Mental Health</span></h3>
+        <div class="tags"><span class="tag"><span class="zh">批量筛查与分级</span><span class="tw">批量篩查與分級</span><span class="en">Screening &amp; triage</span></span><span class="tag"><span class="zh">医疗级辅助干预</span><span class="tw">醫療級輔助干預</span><span class="en">Clinical-grade intervention</span></span><span class="tag"><span class="zh">科学督导与分析</span><span class="tw">科學督導與分析</span><span class="en">Supervision &amp; analysis</span></span></div>
+        <p><span class="zh">Cormira 与医疗机构及高校研究团队合作，开发面向心理健康服务与研究流程的 AI 辅助系统。</span><span class="tw">Cormira 與醫療機構及高校研究團隊合作，開發面向心理健康服務與研究流程的 AI 輔助系統。</span><span class="en">Cormira partners with medical institutions and university research teams to develop AI-assisted systems for mental health services and research workflows.</span></p>
+        <p><span class="zh">工作覆盖筛查分级、辅助干预、专业督导与数据分析，重点关注专业监督、安全边界和结果审查，并同步探索能力延伸至普通消费者的可能性。</span><span class="tw">工作覆蓋篩查分級、輔助干預、專業督導與數據分析，重點關注專業監督、安全邊界和結果審查，並同步探索能力延伸至普通消費者的可能性。</span><span class="en">This work spans screening and triage, assisted intervention, professional supervision, and data analysis — with emphasis on professional oversight, safety boundaries, and outcome review — while exploring how these capabilities might extend to general consumers.</span></p>
+        <div class="proj-meta"><span class="zh"><b>合作机构</b>　浙大一院、湘雅二医院、浙江省精神卫生中心、西湖大学、香港科技大学等。</span><span class="tw"><b>合作機構</b>　浙大一院、湘雅二醫院、浙江省精神衞生中心、西湖大學、香港科技大學等。</span><span class="en"><b>Partners</b>　First Affiliated Hospital of Zhejiang University, Second Xiangya Hospital, Zhejiang Mental Health Center, Westlake University, HKUST, and others.</span></div>
       </article>
 
-      <article class="proj proj--future reveal">
+      <article class="proj reveal">
         <div class="proj-head">
-          <span class="proj-eye"><span class="zh">我们的长期方向</span><span class="en">Our long-term direction</span></span>
-          <span class="pill"><span class="zh">持续研究中</span><span class="en">Ongoing research</span></span>
+          <span class="proj-eye"><span class="zh">长期研究方向</span><span class="tw">長期研究方向</span><span class="en">Long-term R&amp;D direction</span></span>
+          <span class="pill live"><span class="zh">持续研究中</span><span class="tw">持續研究中</span><span class="en">Ongoing research</span></span>
         </div>
-        <h3><span class="zh">Agent 治理</span><span class="en">Agent Governance</span></h3>
-        <p><span class="zh">模拟人类行为是我们的起点。当 AI 越来越多地参与判断与决策，我们研究如何评估这些系统的行为、解释其决策依据，并建立能够被人类审查和约束的评测框架。</span><span class="en">Simulating human behavior is our starting point. As AI increasingly participates in judgment and decision-making, we study how to evaluate these systems' behavior, explain their reasoning, and build evaluation frameworks that people can review and constrain.</span></p>
-        <div class="tags"><span class="tag"><span class="zh">Agent 行为评测</span><span class="en">Agent behavior eval</span></span><span class="tag"><span class="zh">可信度框架</span><span class="en">Trustworthiness framework</span></span><span class="tag"><span class="zh">决策可解释性</span><span class="en">Decision explainability</span></span></div>
-        <div class="proj-meta"><span class="zh"><b>长期目标</b>　建立 Agent 经济时代的行为可信度评测体系，并推动相关标准形成。</span><span class="en"><b>Long-term goal</b>　Build an evaluation system for behavioral trustworthiness in the agent economy, and contribute to related standards.</span></div>
+        <h3><span class="zh">Agent 治理</span><span class="tw">Agent 治理</span><span class="en">Agent Governance</span></h3>
+        <div class="tags"><span class="tag"><span class="zh">智能体行为评测</span><span class="tw">智能體行為評測</span><span class="en">Behavior evaluation</span></span><span class="tag"><span class="zh">决策解释和回归</span><span class="tw">決策解釋和迴歸</span><span class="en">Decision explanation</span></span><span class="tag"><span class="zh">风险预判和治理</span><span class="tw">風險預判和治理</span><span class="en">Risk &amp; governance rules</span></span></div>
+        <p><span class="zh">高保真行为模拟只是起点。随着 Agent 更多参与分析、判断与决策，我们将持续评估其行为表现，解释决策逻辑并识别潜在风险。</span><span class="tw">高保真行為模擬只是起點。隨着 Agent 更多參與分析、判斷與決策，我們將持續評估其行為表現，解釋決策邏輯並識別潛在風險。</span><span class="en">High-fidelity behavior simulation is only the starting point. As agents take on more analysis, judgment, and decision-making, we continuously evaluate their behavior, explain their decision logic, and identify potential risks.</span></p>
+        <p><span class="zh">基于此，我们持续探索可供人类审查、校正与约束的评测方法与治理框架，推动智能体向更安全、可控、可信的方向发展。</span><span class="tw">基於此，我們持續探索可供人類審查、校正與約束的評測方法與治理框架，推動智能體向更安全、可控、可信的方向發展。</span><span class="en">On this basis, we explore evaluation methods and governance frameworks that people can review, correct, and constrain — moving agents toward greater safety, control, and trustworthiness.</span></p>
+        <div class="proj-meta"><span class="zh"><b>目标</b>　建立面向 Agent 经济时代的智能体行为解释与可信度评测体系，并构建相关标准。</span><span class="tw"><b>目標</b>　建立面向 Agent 經濟時代的智能體行為解釋與可信度評測體系，並構建相關標準。</span><span class="en"><b>Goal</b>　Build a system for explaining agent behavior and evaluating trustworthiness for the agent economy, and help establish related standards.</span></div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- RESEARCH -->
-<section class="section" id="research">
-  <div class="container">
-    <div class="head reveal">
-      <h2 class="title"><span class="zh">已有的研究和进展</span><span class="en">Research and progress</span></h2>
-      <div class="head-bar" aria-hidden="true"></div>
-    </div>
-    <div class="research-shell reveal">
-      <div class="research-tools">
-        <span class="research-counter"><b id="research-current">01</b> / <span id="research-total">08</span></span>
-        <div class="research-arrows">
-          <button class="arrow-btn" id="research-prev" type="button" aria-label="Previous">←</button>
-          <button class="arrow-btn" id="research-next" type="button" aria-label="Next">→</button>
-        </div>
-      </div>
-      <div class="research-viewport" id="research-viewport">
-        <div class="research-track" id="research-track">
-      <article class="rcard"><span class="pill live"><span class="zh">已发表</span><span class="en">Published</span></span><h3><span class="zh">人类行为模拟的评测基准与方法</span><span class="en">Benchmarks &amp; methods for behavior simulation</span></h3><p><span class="zh">建立用于度量模拟行为质量的评测方法与技术基础。</span><span class="en">Evaluation methods and technical foundations for measuring the quality of simulated behavior.</span></p><div class="rfoot"><span><span class="zh">链接待补</span><span class="en">Link pending</span></span></div></article>
-      <article class="rcard"><span class="pill live"><span class="zh">已发表</span><span class="en">Published</span></span><h3>LLMs as causal world models</h3><p><span class="zh">研究大模型作为因果世界模型进行推理的能力。</span><span class="en">Studying how large models can reason as causal world models.</span></p><div class="rfoot"><span><span class="zh">链接待补</span><span class="en">Link pending</span></span></div></article>
-      <a class="rcard" href="https://journals.sagepub.com/doi/abs/10.1177/00222437211044472" target="_blank" rel="noopener"><span class="pill live"><span class="zh">已发表 · JMR</span><span class="en">Published · JMR</span></span><h3><span class="zh">消费者行为量化研究</span><span class="en">Quantitative consumer behavior research</span></h3><p><span class="zh">用量化模型研究消费者的判断与决策机制。</span><span class="en">Using quantitative models to study consumer judgment and decision-making.</span></p><div class="rfoot"><span></span><span class="plink"><span class="zh">查看论文</span><span class="en">View paper</span><span class="arw">↗</span></span></div></a>
-      <a class="rcard" href="https://arxiv.org/abs/2305.00450" target="_blank" rel="noopener"><span class="pill live"><span class="zh">已公开 · arXiv</span><span class="en">Public · arXiv</span></span><h3><span class="zh">AI 与心理及精神医学交叉</span><span class="en">AI × psychology and psychiatry</span></h3><p><span class="zh">研究面向心理健康场景的对话系统与算法方法。</span><span class="en">Dialogue systems and algorithmic methods for mental health settings.</span></p><div class="rfoot"><span></span><span class="plink"><span class="zh">查看论文</span><span class="en">View paper</span><span class="arw">↗</span></span></div></a>
-      <article class="rcard"><span class="pill"><span class="zh">进行中</span><span class="en">Ongoing</span></span><h3><span class="zh">多智能体心理健康筛查分级</span><span class="en">Multi-agent screening &amp; triage</span></h3><p><span class="zh">研究大规模筛查、风险分级与转介方法。</span><span class="en">Methods for large-scale screening, risk stratification, and referral.</span></p><div class="rfoot"><span><span class="zh">研究中</span><span class="en">In research</span></span></div></article>
-      <article class="rcard"><span class="pill"><span class="zh">进行中</span><span class="en">Ongoing</span></span><h3><span class="zh">AI 督导师 · 结构化督导</span><span class="en">AI supervisor · structured supervision</span></h3><p><span class="zh">研究如何提高督导资源与初级咨询师之间的匹配效率。</span><span class="en">Improving how supervision resources are matched with junior counselors.</span></p><div class="rfoot"><span><span class="zh">研究中</span><span class="en">In research</span></span></div></article>
-      <article class="rcard"><span class="pill"><span class="zh">进行中</span><span class="en">Ongoing</span></span><h3><span class="zh">面向 Agent 经济的行为可信度评测</span><span class="en">Trustworthiness eval for the agent economy</span></h3><p><span class="zh">研究 Agent 行为可信度的评测方法与相关标准。</span><span class="en">Evaluation methods and related standards for agent behavioral trustworthiness.</span></p><div class="rfoot"><span><span class="zh">研究中</span><span class="en">In research</span></span></div></article>
-      <article class="rcard"><span class="pill"><span class="zh">持续更新</span><span class="en">Updating</span></span><h3><span class="zh">更多研究正在进行</span><span class="en">More research underway</span></h3><p><span class="zh">新的公开成果将在完成核验与授权后更新。</span><span class="en">New public work will be added after verification and authorization.</span></p><div class="rfoot"><span><span class="zh">持续更新</span><span class="en">Ongoing updates</span></span></div></article>
-        </div>
-      </div>
-      <div class="research-progress" aria-hidden="true"><i id="research-progress"></i></div>
-    </div>
-  </div>
-</section>
-
-<!-- TEAM + CONTACT (integrated) -->
+<!-- TEAM + CONTACT -->
 <section class="section" id="team" data-nav-section>
   <div class="container">
     <div class="head reveal">
-      <h2 class="title"><span class="zh">欢迎联系，与我们同行</span><span class="en">Get in touch, work with us</span></h2>
+      <h2 class="title" style="transform:translateY(-30px)"><span class="zh">团队与联系</span><span class="tw">團隊與聯繫</span><span class="en">Team &amp; Contact</span></h2>
       <div class="head-bar" aria-hidden="true"></div>
     </div>
     <div class="team-wrap reveal">
       <div class="team-body">
-        <div class="team-cols">
-          <div class="team-col">
-        <h3><span class="zh">团队背景</span><span class="en">Background</span></h3>
-        <p><span class="zh">核心团队来自 CMU、Google AI、香港科技大学、清华大学、浙江大学、西湖大学等高校，以及字节跳动、华为、大疆等科技企业，具备计算机科学、心理学与行为经济学交叉背景。</span><span class="en">The core team comes from CMU, Google AI, HKUST, Tsinghua, Zhejiang University, and Westlake University, as well as ByteDance, Huawei, and DJI, with interdisciplinary backgrounds spanning computer science, psychology, and behavioral economics.</span></p>
-      </div>
-          <div class="team-col">
-        <h3><span class="zh">研究与临床</span><span class="en">Research &amp; clinical</span></h3>
-        <p><span class="zh">研究方向覆盖因果推断、大模型对齐、多智能体系统与 AI 辅助心理干预。相关工作发表于 Marketing Science、JMR、ISR 等顶级期刊及 ACL、NeurIPS 等 AI 会议；临床研究由浙大一院、湘雅二医院精神卫生科主任医师担任专业顾问。</span><span class="en">Research spans causal inference, large-model alignment, multi-agent systems, and AI-assisted mental health intervention. Work appears in Marketing Science, JMR, ISR, and at ACL, NeurIPS, and other AI venues; clinical research is advised by chief psychiatrists at the First Affiliated Hospital of Zhejiang University and Second Xiangya Hospital.</span></p>
-      </div>
+        <div class="team-single">
+          <h3><span class="zh">团队背景</span><span class="tw">團隊背景</span><span class="en">Team background</span></h3>
+          <p><span class="zh">Cormira 是一支融合计算机科学、心理学与行为经济学的跨学科团队。核心成员曾就读或任职于 CMU、香港科技大学、清华大学、浙江大学、四川大学、西湖大学，以及 Google AI、字节跳动、华为、大疆等高校、研究机构与科技企业。<br>诚邀更多人才加入。</span><span class="tw">Cormira 是一支融合計算機科學、心理學與行為經濟學的跨學科團隊。核心成員曾就讀或任職於 CMU、香港科技大學、清華大學、浙江大學、四川大學、西湖大學，以及 Google AI、字節跳動、華為、大疆等高校、研究機構與科技企業。<br>誠邀更多人才加入。</span><span class="en">Cormira is an interdisciplinary team of researchers and industry practitioners across computer science, psychology, and behavioral economics. Core members have studied or worked at CMU, HKUST, Tsinghua, Zhejiang University, Sichuan University, and Westlake University, as well as Google AI, ByteDance, Huawei, DJI, and other universities, research institutions, and technology companies.<br>We warmly welcome new talent to join us.</span></p>
+          <p><span class="zh">团队聚焦因果推断、大模型对齐、多智能体系统与 AI 辅助心理干预，相关成果发表于 Marketing Science、JMR、ISR 等学术期刊及 ACL、NeurIPS 等人工智能会议，并与国内多家三甲医院开展联合研究与实验验证。<br>欢迎合作洽谈。</span><span class="tw">團隊聚焦因果推斷、大模型對齊、多智能體系統與 AI 輔助心理干預，相關成果發表於 Marketing Science、JMR、ISR 等學術期刊及 ACL、NeurIPS 等人工智能會議，並與國內多家三甲醫院開展聯合研究與實驗驗證。<br>歡迎合作洽談。</span><span class="en">The team's research spans causal inference, large-model alignment, multi-agent systems, and AI-assisted mental health intervention. Findings appear in journals such as Marketing Science, JMR, and ISR, and at AI conferences including ACL and NeurIPS; we also conduct joint research and experimental validation with clinical and mental-health teams at several top-tier hospitals in China.<br>We're always open to new collaborations.</span></p>
+          <p><span class="zh">我们坚信，研究的真正价值不止于提出新的解释，也在于回答真实的问题。<br>这些问题横跨行为、技术与应用，仍有许多尚未被解答。</span><span class="tw">我們堅信，研究的真正價值不止於提出新的解釋，也在於回答真實的問題。<br>這些問題橫跨行為、技術與應用，仍有許多尚未被解答。</span><span class="en">We firmly believe the true value of research lies not only in proposing new explanations, but also in answering real problems.<br>These problems span behavior, technology, and application, and many remain unanswered.</span></p>
         </div>
-        <p class="hiring"><span class="zh">理解人，是 AI 走向可信的第一步。</span><span class="en">Understanding people is the first step toward trustworthy AI.</span></p>
+        <p class="hiring"><span class="zh">Cormira 期待与全球的优秀伙伴一起，找到更好的答案。</span><span class="tw">Cormira 期待與全球的優秀夥伴一起，找到更好的答案。</span><span class="en">Cormira looks forward to working with outstanding partners worldwide to find better answers.</span></p>
       </div>
       <aside class="contact-card">
-        <div>
-          <p class="contact-quote"><span class="zh">我们正在招募研究人员、算法工程师，以及产品、设计、开发和运营人才。部分岗位支持兼职与远程协作，线下协作主要分布在香港、深圳、杭州和上海。</span><span class="en">We are hiring researchers, algorithm engineers, and people in product, design, engineering, and operations. Some roles support part-time and remote collaboration, with in-person collaboration mainly in Hong Kong, Shenzhen, Hangzhou, and Shanghai.</span></p>
-          <p class="contact-sub"><span class="zh">如需开展研究或产品合作、了解投资机会或加入团队，请联系我们。</span><span class="en">For research or product collaboration, investment opportunities, or joining the team, get in touch.</span></p>
+        <div class="contact-fields">
+          <div class="cfield"><span class="cfield-label"><span class="zh">在招岗位</span><span class="tw">在招崗位</span><span class="en">Open positions</span></span><p><span class="zh">擅长使用 AI 工具的研究员（行为建模 / 因果推断）、算法工程师（LLM / 多智能体）、产品经理（策略&amp;增长）、资深 UI&amp;UX、内容制作和运营<br>工作地：深圳、上海、杭州、香港，部分远程</span><span class="tw">擅長使用 AI 工具的研究員（行為建模 / 因果推斷）、算法工程師（LLM / 多智能體）、產品經理（策略&amp;增長）、資深 UI&amp;UX、內容製作和運營<br>工作地：深圳、上海、杭州、香港，部分遠程</span><span class="en">AI-fluent researchers (behavioral modeling / causal inference), algorithm engineers (LLM / multi-agent systems), product managers (strategy &amp; growth), senior UI&amp;UX designers, and content production &amp; operations.<br>Based in Shenzhen, Shanghai, Hangzhou, and Hong Kong; some roles remote.</span></p></div>
+          <div class="cfield"><span class="cfield-label"><span class="zh">合作洽谈</span><span class="tw">合作洽談</span><span class="en">Partnerships</span></span><p><span class="zh">开放联合研究、产品共建、场景验证、投资合作</span><span class="tw">開放聯合研究、產品共建、場景驗證、投資合作</span><span class="en">Open to joint research, product co-development, real-world validation, and investment.</span></p></div>
+          <div class="cfield"><span class="cfield-label"><span class="zh">欢迎联系</span><span class="tw">歡迎聯繫</span><span class="en">Get in touch</span></span><p><span class="zh">来信请注明：合作洽谈 / 加入团队</span><span class="tw">來信請註明：合作洽談 / 加入團隊</span><span class="en">In your email, please note: Partnerships / Join the team</span></p></div>
         </div>
-        <a class="mail" href="mailto:kayrashuai1900@gmail.com"><span>kayrashuai1900@gmail.com</span><span>↗</span></a>
+        <a class="mail" href="mailto:kayrashuai@ust.hk"><span><span class="zh">联系邮箱：</span><span class="tw">聯繫郵箱：</span><span class="en">Email: </span>kayrashuai@ust.hk</span><span>↗</span></a>
       </aside>
     </div>
     <div class="site-foot reveal">
       <a class="brand" href="#top" aria-label="Cormira">
-        <strong><span class="zh">© 2026 扶光心舍 / CORMIRA</span><span class="en">© 2026 Cormira</span></strong>
+        <strong><span class="zh">© 2026 扶光心舍 / CORMIRA</span><span class="tw">© 2026 扶光心舍 / CORMIRA</span><span class="en">© 2026 Cormira</span></strong>
       </a>
       <div class="lang" role="group" aria-label="Language">
-        <button type="button" data-lang="zh" class="active">中</button>
+        <button type="button" data-lang="tw" class="active">繁</button>
+        <button type="button" data-lang="zh">简</button>
         <button type="button" data-lang="en">EN</button>
       </div>
     </div>
@@ -354,13 +318,13 @@ html[data-lang="en"] .zh{display:none}
   // language toggle
   const langButtons=[...document.querySelectorAll('.lang button[data-lang]')];
   const setLang=lang=>{
-    root.dataset.lang=lang;root.lang=lang==='zh'?'zh-CN':'en';
+    root.dataset.lang=lang;root.lang=lang==='en'?'en':(lang==='tw'?'zh-Hant':'zh-CN');
     langButtons.forEach(b=>{const a=b.dataset.lang===lang;b.classList.toggle('active',a);b.setAttribute('aria-pressed',String(a))});
-    document.title=lang==='zh'?'扶光心舍 / Cormira':'Cormira';
+    document.title=lang==='en'?'Cormira':'扶光心舍 / Cormira';
     try{localStorage.setItem('cormira-lang',lang)}catch(e){}
   };
-  let saved='zh';try{saved=localStorage.getItem('cormira-lang')||'zh'}catch(e){}
-  setLang(saved==='en'?'en':'zh');
+  let saved='tw';try{saved=localStorage.getItem('cormira-lang')||'tw'}catch(e){}
+  setLang(['tw','zh','en'].includes(saved)?saved:'tw');
   langButtons.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
 
   // mobile menu
@@ -380,32 +344,6 @@ html[data-lang="en"] .zh{display:none}
     secs.forEach(s=>nio.observe(s));
   }
 
-  // research carousel — width-constrained viewport, horizontal scroll
-  const rtrack=document.getElementById('research-track');
-  if(rtrack){
-    const rview=document.getElementById('research-viewport'),
-          rcards=[...rtrack.children],
-          rprev=document.getElementById('research-prev'),
-          rnext=document.getElementById('research-next'),
-          rcur=document.getElementById('research-current'),
-          rtot=document.getElementById('research-total'),
-          rprog=document.getElementById('research-progress');
-    let ri=0,rvis=3,rtimer=0,rtx=0;
-    const rrender=(anim=true)=>{const gap=18,w=rcards[0].getBoundingClientRect().width;rtrack.style.transition=anim?'transform .55s cubic-bezier(.2,.7,.2,1)':'none';rtrack.style.transform=`translate3d(${-ri*(w+gap)}px,0,0)`;rcur.textContent=String(ri+1).padStart(2,'0');rtot.textContent=String(rcards.length).padStart(2,'0');const max=Math.max(1,rcards.length-rvis);rprog.style.transform=`translateX(${ri/max*400}%)`};
-    const rcalc=()=>{rvis=innerWidth<=600?1:innerWidth<=1024?2:3;ri=Math.min(ri,Math.max(0,rcards.length-rvis));rrender(false)};
-    const rrestart=()=>{clearInterval(rtimer);if(!reduce)rtimer=setInterval(()=>rgo(1),3200)};
-    const rgo=d=>{const max=Math.max(0,rcards.length-rvis);ri+=d;if(ri>max)ri=0;if(ri<0)ri=max;rrender(true);rrestart()};
-    rprev.addEventListener('click',()=>rgo(-1));
-    rnext.addEventListener('click',()=>rgo(1));
-    rview.addEventListener('mouseenter',()=>clearInterval(rtimer));
-    rview.addEventListener('mouseleave',rrestart);
-    rview.addEventListener('focusin',()=>clearInterval(rtimer));
-    rview.addEventListener('focusout',rrestart);
-    rview.addEventListener('touchstart',e=>{rtx=e.touches[0].clientX;clearInterval(rtimer)},{passive:true});
-    rview.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-rtx;if(Math.abs(dx)>40)rgo(dx<0?1:-1);else rrestart()},{passive:true});
-    addEventListener('resize',rcalc);
-    rcalc();rrestart();
-  }
 })();
 </script>
 </body>
