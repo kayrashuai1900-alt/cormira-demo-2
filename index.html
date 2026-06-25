@@ -185,6 +185,14 @@ html[data-lang="en"] .tw,html[data-lang="en"] .zh{display:none}
   .reveal{opacity:1;transform:none;transition:none}
   *{transition:none!important;animation:none!important}
 }
+
+/* ---------- EN-only line-count tuning (scoped to data-lang="en"; does not affect zh/tw) ---------- */
+html[data-lang="en"] .hero h1{font-size:clamp(30px,7vw,82px);letter-spacing:-.028em;line-height:1.06;text-wrap:balance}
+html[data-lang="en"] .hero-copy{max-width:min(96vw,1040px)}
+html[data-lang="en"] .hero-lead{max-width:94ch;font-size:clamp(14.5px,1.45vw,16.5px);line-height:1.5}
+html[data-lang="en"] .proj-head{min-height:30px}
+html[data-lang="en"] .proj h3{font-size:clamp(22px,2.35vw,27px);letter-spacing:-.022em;min-height:2.3em}
+html[data-lang="en"] .proj-eye{font-size:10.5px;letter-spacing:.05em}
 </style>
 </head>
 <body>
@@ -209,9 +217,9 @@ html[data-lang="en"] .tw,html[data-lang="en"] .zh{display:none}
 <section class="hero" id="overview" data-nav-section>
   <div class="container hero-grid">
     <div class="hero-copy reveal">
-      <h1><span class="zh">让 AI 照见人心</span><span class="tw">讓 AI 照見人心</span><span class="en">Let AI understand human behavior</span></h1>
+      <h1><span class="zh">让 AI 照见人心</span><span class="tw">讓 AI 照見人心</span><span class="en">Recovering Human Decision Logic from Behavior</span></h1>
       <div class="hero-bar" aria-hidden="true"></div>
-      <p class="hero-lead"><span class="zh">扶光心舍（Cormira）致力于研究人与 AI 的行为及决策，<br>以预测、模拟、可解释建模为核心，用科研驱动产业智能。</span><span class="tw">扶光心舍（Cormira）致力於研究人與 AI 的行為及決策，<br>以預測、模擬、可解釋建模為核心，用科研驅動產業智能。</span><span class="en">Cormira studies human and AI behavior and decision-making,<br>centered on prediction, simulation, and interpretable modeling — driving applied intelligence through research.</span></p>
+      <p class="hero-lead"><span class="zh">扶光心舍（Cormira）致力于研究人与 AI 的行为及决策，<br>以预测、模拟、可解释建模为核心，用科研驱动产业智能。</span><span class="tw">扶光心舍（Cormira）致力於研究人與 AI 的行為及決策，<br>以預測、模擬、可解釋建模為核心，用科研驅動產業智能。</span><span class="en">Cormira builds AI that elicits, formalizes, and reconstructs the decision logic behind human behavior —<br>through predictive modeling, behavioral simulation, and interpretable inference.</span></p>
       <div class="hero-actions">
         <a class="tlink" href="#work"><span class="zh">查看我们的工作</span><span class="tw">查看我們的工作</span><span class="en">Explore our work</span><span class="arw">→</span></a>
         <a class="tlink" href="#team"><span class="zh">联系我们</span><span class="tw">聯繫我們</span><span class="en">Contact us</span><span class="arw">→</span></a>
@@ -226,9 +234,9 @@ html[data-lang="en"] .tw,html[data-lang="en"] .zh{display:none}
 <section class="section section--warm" id="work" data-nav-section>
   <div class="container">
     <div class="head reveal">
-      <h2 class="title" style="transform:translateY(-30px)"><span class="zh">从理解人的行为，到评估 AI 的行为</span><span class="tw">從理解人的行為，到評估 AI 的行為</span><span class="en">From understanding human behavior to evaluating AI behavior</span></h2>
+      <h2 class="title" style="transform:translateY(-30px)"><span class="zh">从理解人的行为，到评估 AI 的行为</span><span class="tw">從理解人的行為，到評估 AI 的行為</span><span class="en">From modeling human behavior to evaluating artificial agents</span></h2>
       <div class="head-bar" aria-hidden="true"></div>
-      <p class="title-desc"><span class="zh">我们围绕行为的模拟、测量与解释开展研究，并将相关方法应用于心理健康服务和智能体行为治理</span><span class="tw">我們圍繞行為的模擬、測量與解釋開展研究，並將相關方法應用於心理健康服務和智能體行為治理</span><span class="en">We study the simulation, measurement, and interpretation of behavior,<br>and apply the same methods to mental health services and agent behavior governance.</span></p>
+      <p class="title-desc"><span class="zh">我们围绕行为的模拟、测量与解释开展研究，并将相关方法应用于心理健康服务和智能体行为治理</span><span class="tw">我們圍繞行為的模擬、測量與解釋開展研究，並將相關方法應用於心理健康服務和智能體行為治理</span><span class="en">We develop methods for the simulation, measurement, and interpretation of behavior,<br>extending them to mental health and the governance of autonomous agents.</span></p>
     </div>
     <div class="proj-grid">
       <article class="proj reveal">
@@ -236,35 +244,35 @@ html[data-lang="en"] .tw,html[data-lang="en"] .zh{display:none}
           <span class="proj-eye"><span class="zh">当前聚焦的研究</span><span class="tw">當前聚焦的研究</span><span class="en">Current research focus</span></span>
           <span class="pill live"><span class="zh">项目已落地</span><span class="tw">項目已落地</span><span class="en">Deployed</span></span>
         </div>
-        <h3><span class="zh">高保真行为模拟</span><span class="tw">高保真行為模擬</span><span class="en">High-fidelity Behavior Simulation</span></h3>
-        <div class="tags"><span class="tag"><span class="zh">消费者研究</span><span class="tw">消費者研究</span><span class="en">Consumer research</span></span><span class="tag"><span class="zh">概念测试</span><span class="tw">概念測試</span><span class="en">Concept testing</span></span><span class="tag"><span class="zh">预演模拟策略</span><span class="tw">預演模擬策略</span><span class="en">Strategy rehearsal</span></span></div>
-        <p><span class="zh">团队基于自研算法，构建可控制、可复现的人类行为模拟环境，用于消费者决策研究、产品概念测试与群体推演。</span><span class="tw">團隊基於自研算法，構建可控制、可復現的人類行為模擬環境，用於消費者決策研究、產品概念測試與羣體推演。</span><span class="en">Using proprietary algorithms, the team builds controllable, reproducible environments for simulating human behavior, applied to consumer decision research, product concept testing, and population-level rehearsal.</span></p>
-        <p><span class="zh">在适用场景下，行为模拟可作为真人实验的补充，降低样本成本、提升研究效率，并增强结果的可复现性。</span><span class="tw">在適用場景下，行為模擬可作為真人實驗的補充，降低樣本成本、提升研究效率，並增強結果的可復現性。</span><span class="en">Where appropriate, behavior simulation can complement human-subject studies, lowering sample costs, improving research efficiency, and strengthening reproducibility.</span></p>
-        <div class="proj-meta"><span class="zh"><b>进展</b>　已与一家亚太区头部保险公司完成项目落地，并持续迭代优化。</span><span class="tw"><b>進展</b>　已與一家亞太區頭部保險公司完成項目落地，並持續迭代優化。</span><span class="en"><b>Progress</b>　Completed a project deployment with a leading Asia-Pacific insurer, with ongoing iteration.</span></div>
+        <h3><span class="zh">高保真行为模拟</span><span class="tw">高保真行為模擬</span><span class="en">High-Fidelity Behavioral Simulation</span></h3>
+        <div class="tags"><span class="tag"><span class="zh">消费者研究</span><span class="tw">消費者研究</span><span class="en">Consumer research</span></span><span class="tag"><span class="zh">概念测试</span><span class="tw">概念測試</span><span class="en">Concept testing</span></span></div>
+        <p><span class="zh">团队基于自研算法，构建可控制、可复现的人类行为模拟环境，用于消费者决策研究、产品概念测试与群体推演。</span><span class="tw">團隊基於自研算法，構建可控制、可復現的人類行為模擬環境，用於消費者決策研究、產品概念測試與羣體推演。</span><span class="en">Using proprietary algorithms, we construct controlled, reproducible environments for simulating human behavior, supporting consumer-decision research, concept testing, and population-level simulation.</span></p>
+        <p><span class="zh">在适用场景下，行为模拟可作为真人实验的补充，降低样本成本、提升研究效率，并增强结果的可复现性。</span><span class="tw">在適用場景下，行為模擬可作為真人實驗的補充，降低樣本成本、提升研究效率，並增強結果的可復現性。</span><span class="en">Where appropriate, behavioral simulation complements human-subject studies — reducing sample costs, improving efficiency, and strengthening reproducibility.</span></p>
+        <div class="proj-meta"><span class="zh"><b>进展</b>　已与一家亚太区头部保险公司完成项目落地，并持续迭代优化。</span><span class="tw"><b>進展</b>　已與一家亞太區頭部保險公司完成項目落地，並持續迭代優化。</span><span class="en"><b>Progress</b>　Deployed with a leading Asia-Pacific insurer, with ongoing refinement.</span></div>
       </article>
 
       <article class="proj reveal">
         <div class="proj-head">
           <span class="proj-eye"><span class="zh">正在构建的产品</span><span class="tw">正在構建的產品</span><span class="en">Product in development</span></span>
-          <span class="pill live"><span class="zh">开发验证中</span><span class="tw">開發驗證中</span><span class="en">In development</span></span>
+          <span class="pill live"><span class="zh">开发验证中</span><span class="tw">開發驗證中</span><span class="en">In validation</span></span>
         </div>
         <h3><span class="zh">行为智能与心理</span><span class="tw">行為智能與心理</span><span class="en">Behavioral Intelligence × Mental Health</span></h3>
-        <div class="tags"><span class="tag"><span class="zh">批量筛查与分级</span><span class="tw">批量篩查與分級</span><span class="en">Screening &amp; triage</span></span><span class="tag"><span class="zh">医疗级辅助干预</span><span class="tw">醫療級輔助干預</span><span class="en">Clinical-grade intervention</span></span><span class="tag"><span class="zh">科学督导与分析</span><span class="tw">科學督導與分析</span><span class="en">Supervision &amp; analysis</span></span></div>
-        <p><span class="zh">Cormira 与医疗机构及高校研究团队合作，开发面向心理健康服务与研究流程的 AI 辅助系统。</span><span class="tw">Cormira 與醫療機構及高校研究團隊合作，開發面向心理健康服務與研究流程的 AI 輔助系統。</span><span class="en">Cormira partners with medical institutions and university research teams to develop AI-assisted systems for mental health services and research workflows.</span></p>
-        <p><span class="zh">工作覆盖筛查分级、辅助干预、专业督导与数据分析，重点关注专业监督、安全边界和结果审查，并同步探索能力延伸至普通消费者的可能性。</span><span class="tw">工作覆蓋篩查分級、輔助干預、專業督導與數據分析，重點關注專業監督、安全邊界和結果審查，並同步探索能力延伸至普通消費者的可能性。</span><span class="en">This work spans screening and triage, assisted intervention, professional supervision, and data analysis — with emphasis on professional oversight, safety boundaries, and outcome review — while exploring how these capabilities might extend to general consumers.</span></p>
-        <div class="proj-meta"><span class="zh"><b>合作机构</b>　浙大一院、湘雅二医院、浙江省精神卫生中心、西湖大学、香港科技大学等。</span><span class="tw"><b>合作機構</b>　浙大一院、湘雅二醫院、浙江省精神衞生中心、西湖大學、香港科技大學等。</span><span class="en"><b>Partners</b>　First Affiliated Hospital of Zhejiang University, Second Xiangya Hospital, Zhejiang Mental Health Center, Westlake University, HKUST, and others.</span></div>
+        <div class="tags"><span class="tag"><span class="zh">批量筛查与分级</span><span class="tw">批量篩查與分級</span><span class="en">Screening &amp; triage</span></span><span class="tag"><span class="zh">医疗级辅助干预</span><span class="tw">醫療級輔助干預</span><span class="en">Clinical-grade intervention</span></span></div>
+        <p><span class="zh">Cormira 与医疗机构及高校研究团队合作，开发面向心理健康服务与研究流程的 AI 辅助系统。</span><span class="tw">Cormira 與醫療機構及高校研究團隊合作，開發面向心理健康服務與研究流程的 AI 輔助系統。</span><span class="en">In collaboration with clinical institutions and academic research teams, Cormira develops AI-assisted systems for mental health services and research workflows.</span></p>
+        <p><span class="zh">工作覆盖筛查分级、辅助干预、专业督导与数据分析，重点关注专业监督、安全边界和结果审查，并同步探索能力延伸至普通消费者的可能性。</span><span class="tw">工作覆蓋篩查分級、輔助干預、專業督導與數據分析，重點關注專業監督、安全邊界和結果審查，並同步探索能力延伸至普通消費者的可能性。</span><span class="en">This work spans screening and triage, assisted intervention, clinical supervision, and data analysis, with emphasis on professional oversight, safety boundaries, and outcome review — while examining how these capabilities may extend to consumer-facing applications.</span></p>
+        <div class="proj-meta"><span class="zh"><b>合作机构</b>　浙大一院、湘雅二医院、浙江省精神卫生中心、西湖大学、香港科技大学等。</span><span class="tw"><b>合作機構</b>　浙大一院、湘雅二醫院、浙江省精神衞生中心、西湖大學、香港科技大學等。</span><span class="en"><b>Partners</b>　First Affiliated Hospital of Zhejiang University School of Medicine, Second Xiangya Hospital of Central South University, Zhejiang Mental Health Center, Westlake University, HKUST, and others.</span></div>
       </article>
 
       <article class="proj reveal">
         <div class="proj-head">
-          <span class="proj-eye"><span class="zh">长期研究方向</span><span class="tw">長期研究方向</span><span class="en">Long-term R&amp;D direction</span></span>
+          <span class="proj-eye"><span class="zh">长期研究方向</span><span class="tw">長期研究方向</span><span class="en">Long-term research direction</span></span>
           <span class="pill live"><span class="zh">持续研究中</span><span class="tw">持續研究中</span><span class="en">Ongoing research</span></span>
         </div>
         <h3><span class="zh">Agent 治理</span><span class="tw">Agent 治理</span><span class="en">Agent Governance</span></h3>
-        <div class="tags"><span class="tag"><span class="zh">智能体行为评测</span><span class="tw">智能體行為評測</span><span class="en">Behavior evaluation</span></span><span class="tag"><span class="zh">决策解释和回归</span><span class="tw">決策解釋和迴歸</span><span class="en">Decision explanation</span></span><span class="tag"><span class="zh">风险预判和治理</span><span class="tw">風險預判和治理</span><span class="en">Risk &amp; governance rules</span></span></div>
-        <p><span class="zh">高保真行为模拟只是起点。随着 Agent 更多参与分析、判断与决策，我们将持续评估其行为表现，解释决策逻辑并识别潜在风险。</span><span class="tw">高保真行為模擬只是起點。隨着 Agent 更多參與分析、判斷與決策，我們將持續評估其行為表現，解釋決策邏輯並識別潛在風險。</span><span class="en">High-fidelity behavior simulation is only the starting point. As agents take on more analysis, judgment, and decision-making, we continuously evaluate their behavior, explain their decision logic, and identify potential risks.</span></p>
-        <p><span class="zh">基于此，我们持续探索可供人类审查、校正与约束的评测方法与治理框架，推动智能体向更安全、可控、可信的方向发展。</span><span class="tw">基於此，我們持續探索可供人類審查、校正與約束的評測方法與治理框架，推動智能體向更安全、可控、可信的方向發展。</span><span class="en">On this basis, we explore evaluation methods and governance frameworks that people can review, correct, and constrain — moving agents toward greater safety, control, and trustworthiness.</span></p>
-        <div class="proj-meta"><span class="zh"><b>目标</b>　建立面向 Agent 经济时代的智能体行为解释与可信度评测体系，并构建相关标准。</span><span class="tw"><b>目標</b>　建立面向 Agent 經濟時代的智能體行為解釋與可信度評測體系，並構建相關標準。</span><span class="en"><b>Goal</b>　Build a system for explaining agent behavior and evaluating trustworthiness for the agent economy, and help establish related standards.</span></div>
+        <div class="tags"><span class="tag"><span class="zh">智能体行为评测</span><span class="tw">智能體行為評測</span><span class="en">Behavior evaluation</span></span><span class="tag"><span class="zh">风险预判和治理</span><span class="tw">風險預判和治理</span><span class="en">Risk anticipation &amp; governance</span></span></div>
+        <p><span class="zh">高保真行为模拟只是起点。随着 Agent 更多参与分析、判断与决策，我们将持续评估其行为表现，解释决策逻辑并识别潜在风险。</span><span class="tw">高保真行為模擬只是起點。隨着 Agent 更多參與分析、判斷與決策，我們將持續評估其行為表現，解釋決策邏輯並識別潛在風險。</span><span class="en">High-fidelity behavioral simulation is only a starting point. As agents assume greater roles in analysis, judgment, and decision-making, we systematically evaluate their behavior, explain their decision logic, and identify emerging risks.</span></p>
+        <p><span class="zh">基于此，我们持续探索可供人类审查、校正与约束的评测方法与治理框架，推动智能体向更安全、可控、可信的方向发展。</span><span class="tw">基於此，我們持續探索可供人類審查、校正與約束的評測方法與治理框架，推動智能體向更安全、可控、可信的方向發展。</span><span class="en">Building on this, we develop evaluation methods and governance frameworks that enable human review, correction, and constraint of agent behavior — toward agents that are safer, more controllable, and more trustworthy.</span></p>
+        <div class="proj-meta"><span class="zh"><b>目标</b>　建立面向 Agent 经济时代的智能体行为解释与可信度评测体系，并构建相关标准。</span><span class="tw"><b>目標</b>　建立面向 Agent 經濟時代的智能體行為解釋與可信度評測體系，並構建相關標準。</span><span class="en"><b>Goal</b>　Establish a framework for explaining agent behavior and evaluating trustworthiness in the emerging agent economy, and contribute to the standards that govern it.</span></div>
       </article>
     </div>
   </div>
@@ -281,17 +289,17 @@ html[data-lang="en"] .tw,html[data-lang="en"] .zh{display:none}
       <div class="team-body">
         <div class="team-single">
           <h3><span class="zh">团队背景</span><span class="tw">團隊背景</span><span class="en">Team background</span></h3>
-          <p><span class="zh">Cormira 是一支融合计算机科学、心理学与行为经济学的跨学科团队。核心成员曾就读或任职于 CMU、香港科技大学、清华大学、浙江大学、四川大学、西湖大学，以及 Google AI、字节跳动、华为、大疆等高校、研究机构与科技企业。<br>诚邀更多人才加入。</span><span class="tw">Cormira 是一支融合計算機科學、心理學與行為經濟學的跨學科團隊。核心成員曾就讀或任職於 CMU、香港科技大學、清華大學、浙江大學、四川大學、西湖大學，以及 Google AI、字節跳動、華為、大疆等高校、研究機構與科技企業。<br>誠邀更多人才加入。</span><span class="en">Cormira is an interdisciplinary team of researchers and industry practitioners across computer science, psychology, and behavioral economics. Core members have studied or worked at CMU, HKUST, Tsinghua, Zhejiang University, Sichuan University, and Westlake University, as well as Google AI, ByteDance, Huawei, DJI, and other universities, research institutions, and technology companies.<br>We warmly welcome new talent to join us.</span></p>
-          <p><span class="zh">团队聚焦因果推断、大模型对齐、多智能体系统与 AI 辅助心理干预，相关成果发表于 Marketing Science、JMR、ISR 等学术期刊及 ACL、NeurIPS 等人工智能会议，并与国内多家三甲医院开展联合研究与实验验证。<br>欢迎合作洽谈。</span><span class="tw">團隊聚焦因果推斷、大模型對齊、多智能體系統與 AI 輔助心理干預，相關成果發表於 Marketing Science、JMR、ISR 等學術期刊及 ACL、NeurIPS 等人工智能會議，並與國內多家三甲醫院開展聯合研究與實驗驗證。<br>歡迎合作洽談。</span><span class="en">The team's research spans causal inference, large-model alignment, multi-agent systems, and AI-assisted mental health intervention. Findings appear in journals such as Marketing Science, JMR, and ISR, and at AI conferences including ACL and NeurIPS; we also conduct joint research and experimental validation with clinical and mental-health teams at several top-tier hospitals in China.<br>We're always open to new collaborations.</span></p>
-          <p><span class="zh">我们坚信，研究的真正价值不止于提出新的解释，也在于回答真实的问题。<br>这些问题横跨行为、技术与应用，仍有许多尚未被解答。</span><span class="tw">我們堅信，研究的真正價值不止於提出新的解釋，也在於回答真實的問題。<br>這些問題橫跨行為、技術與應用，仍有許多尚未被解答。</span><span class="en">We firmly believe the true value of research lies not only in proposing new explanations, but also in answering real problems.<br>These problems span behavior, technology, and application, and many remain unanswered.</span></p>
+          <p><span class="zh">Cormira 是一支融合计算机科学、心理学与行为经济学的跨学科团队。核心成员曾就读或任职于 CMU、香港科技大学、清华大学、浙江大学、四川大学、西湖大学，以及 Google AI、字节跳动、华为、大疆等高校、研究机构与科技企业。<br>诚邀更多人才加入。</span><span class="tw">Cormira 是一支融合計算機科學、心理學與行為經濟學的跨學科團隊。核心成員曾就讀或任職於 CMU、香港科技大學、清華大學、浙江大學、四川大學、西湖大學，以及 Google AI、字節跳動、華為、大疆等高校、研究機構與科技企業。<br>誠邀更多人才加入。</span><span class="en">Cormira is an interdisciplinary research team spanning computer science, psychology, and behavioral economics, with members who have studied or worked at Carnegie Mellon University, HKUST, Tsinghua University, Zhejiang University, Sichuan University, and Westlake University, as well as Google AI, ByteDance, Huawei, and DJI, among other institutions.<br>We welcome new talent to join us.</span></p>
+          <p><span class="zh">团队聚焦因果推断、大模型对齐、多智能体系统与 AI 辅助心理干预，相关成果发表于 Marketing Science、JMR、ISR 等学术期刊及 ACL、NeurIPS 等人工智能会议，并与国内多家三甲医院开展联合研究与实验验证。<br>欢迎合作洽谈。</span><span class="tw">團隊聚焦因果推斷、大模型對齊、多智能體系統與 AI 輔助心理干預，相關成果發表於 Marketing Science、JMR、ISR 等學術期刊及 ACL、NeurIPS 等人工智能會議，並與國內多家三甲醫院開展聯合研究與實驗驗證。<br>歡迎合作洽談。</span><span class="en">Our research spans causal inference, LLM alignment, multi-agent systems, and AI-assisted psychological intervention. This work has appeared in journals including Marketing Science, JMR, and ISR, and at conferences such as ACL and NeurIPS, alongside clinical research and validation studies with leading hospitals in China.<br>We're always open to new collaborations.</span></p>
+          <p><span class="zh">我们坚信，研究的真正价值不止于提出新的解释，也在于回答真实的问题。<br>这些问题横跨行为、技术与应用，仍有许多尚未被解答。</span><span class="tw">我們堅信，研究的真正價值不止於提出新的解釋，也在於回答真實的問題。<br>這些問題橫跨行為、技術與應用，仍有許多尚未被解答。</span><span class="en">We hold that the value of research lies not only in offering new explanations, but in addressing real questions —<br>questions that span behavior, technology, and practice, many of which remain open.</span></p>
         </div>
-        <p class="hiring"><span class="zh">Cormira 期待与全球的优秀伙伴一起，找到更好的答案。</span><span class="tw">Cormira 期待與全球的優秀夥伴一起，找到更好的答案。</span><span class="en">Cormira looks forward to working with outstanding partners worldwide to find better answers.</span></p>
+        <p class="hiring"><span class="zh">Cormira 期待与全球的优秀伙伴一起，找到更好的答案。</span><span class="tw">Cormira 期待與全球的優秀夥伴一起，找到更好的答案。</span><span class="en">Cormira looks forward to working with great partners worldwide to find better answers.</span></p>
       </div>
       <aside class="contact-card">
         <div class="contact-fields">
-          <div class="cfield"><span class="cfield-label"><span class="zh">在招岗位</span><span class="tw">在招崗位</span><span class="en">Open positions</span></span><p><span class="zh">擅长使用 AI 工具的研究员（行为建模 / 因果推断）、算法工程师（LLM / 多智能体）、产品经理（策略&amp;增长）、资深 UI&amp;UX、内容制作和运营<br>工作地：深圳、上海、杭州、香港，部分远程</span><span class="tw">擅長使用 AI 工具的研究員（行為建模 / 因果推斷）、算法工程師（LLM / 多智能體）、產品經理（策略&amp;增長）、資深 UI&amp;UX、內容製作和運營<br>工作地：深圳、上海、杭州、香港，部分遠程</span><span class="en">AI-fluent researchers (behavioral modeling / causal inference), algorithm engineers (LLM / multi-agent systems), product managers (strategy &amp; growth), senior UI&amp;UX designers, and content production &amp; operations.<br>Based in Shenzhen, Shanghai, Hangzhou, and Hong Kong; some roles remote.</span></p></div>
+          <div class="cfield"><span class="cfield-label"><span class="zh">在招岗位</span><span class="tw">在招崗位</span><span class="en">Open positions</span></span><p><span class="zh">擅长使用 AI 工具的研究员（行为建模 / 因果推断）、算法工程师（LLM / 多智能体）、产品经理（策略&amp;增长）、资深 UI&amp;UX、内容制作和运营<br>工作地：深圳、上海、杭州、香港，部分远程</span><span class="tw">擅長使用 AI 工具的研究員（行為建模 / 因果推斷）、算法工程師（LLM / 多智能體）、產品經理（策略&amp;增長）、資深 UI&amp;UX、內容製作和運營<br>工作地：深圳、上海、杭州、香港，部分遠程</span><span class="en">AI-fluent researchers (behavioral modeling / causal inference), ML / research engineers (LLM / multi-agent systems), product managers (strategy &amp; growth), senior UI/UX designers, and content production &amp; operations.<br>Based in Shenzhen, Shanghai, Hangzhou, and Hong Kong; some roles remote.</span></p></div>
           <div class="cfield"><span class="cfield-label"><span class="zh">合作洽谈</span><span class="tw">合作洽談</span><span class="en">Partnerships</span></span><p><span class="zh">开放联合研究、产品共建、场景验证、投资合作</span><span class="tw">開放聯合研究、產品共建、場景驗證、投資合作</span><span class="en">Open to joint research, product co-development, real-world validation, and investment.</span></p></div>
-          <div class="cfield"><span class="cfield-label"><span class="zh">欢迎联系</span><span class="tw">歡迎聯繫</span><span class="en">Get in touch</span></span><p><span class="zh">来信请注明：合作洽谈 / 加入团队</span><span class="tw">來信請註明：合作洽談 / 加入團隊</span><span class="en">In your email, please note: Partnerships / Join the team</span></p></div>
+          <div class="cfield"><span class="cfield-label"><span class="zh">欢迎联系</span><span class="tw">歡迎聯繫</span><span class="en">Get in touch</span></span><p><span class="zh">来信请注明：合作洽谈 / 加入团队</span><span class="tw">來信請註明：合作洽談 / 加入團隊</span><span class="en">Please use “Partnership Inquiry” or “Careers” in the subject line.</span></p></div>
         </div>
         <a class="mail" href="mailto:kayrashuai@ust.hk"><span><span class="zh">联系邮箱：</span><span class="tw">聯繫郵箱：</span><span class="en">Email: </span>kayrashuai@ust.hk</span><span>↗</span></a>
       </aside>
