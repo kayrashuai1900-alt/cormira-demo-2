@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- fuguang-web-v0.0.2 (self-contained) -->
 <html lang="zh-Hant" data-lang="tw">
 <head>
 <script>(function(){try{var l=localStorage.getItem('cormira-lang');if(['tw','zh','en'].indexOf(l)<0)l='tw';var d=document.documentElement;d.setAttribute('data-lang',l);d.lang=l==='en'?'en':(l==='tw'?'zh-Hant':'zh-CN');}catch(e){}})();</script>
@@ -22,6 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
+/* fuguang-web-v0.0.2 */
 :root{
   --bg:#f7f4ef;          /* warm paper */
   --bg-2:#efeae2;        /* deeper warm block */
@@ -99,7 +101,7 @@ html[data-lang="en"] .tw,html[data-lang="en"] .zh{display:none}
 .reveal.in{opacity:1;transform:none}
 
 /* ---------- sections ---------- */
-.section{min-height:calc(100svh - 64px);display:flex;flex-direction:column;justify-content:center;align-items:center;scroll-snap-align:start;scroll-snap-stop:always;padding-top:clamp(72px,8vh,96px);padding-bottom:clamp(36px,4.5vh,64px);background:var(--bg)}
+.section{min-height:calc(100svh - 64px);display:flex;flex-direction:column;justify-content:center;align-items:center;scroll-snap-align:start;scroll-snap-stop:always;padding-top:clamp(96px,10vh,120px);padding-bottom:clamp(36px,4.5vh,64px);background:var(--bg)}
 .section--warm{background:var(--bg-2)}
 .head{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:clamp(22px,3vh,40px)}
 #team .head{margin-bottom:clamp(36px,4.5vh,52px)}
@@ -108,7 +110,7 @@ html[data-lang="en"] .tw,html[data-lang="en"] .zh{display:none}
 .title-desc{margin-top:18px;color:var(--ink-2);font-size:17px;max-width:none;line-height:1.55;margin-inline:auto;transform:translateY(-15px);text-align:justify;text-align-last:left}
 
 /* ---------- hero ---------- */
-.hero{min-height:100svh;display:flex;align-items:center;scroll-snap-align:start;scroll-snap-stop:always;padding-top:clamp(72px,9vh,104px);padding-bottom:clamp(40px,5vh,76px)}
+.hero{min-height:100svh;display:flex;align-items:center;scroll-snap-align:start;scroll-snap-stop:always;padding-top:clamp(100px,14vh,160px);padding-bottom:clamp(40px,5vh,76px)}
 .hero-grid{display:flex;flex-direction:column;align-items:center;text-align:center}
 .hero-copy{display:flex;flex-direction:column;align-items:center;max-width:52rem}
 .hero-bar{width:48px;height:4px;background:var(--accent);border-radius:2px;margin-top:12px;transform:translateY(-15px)}
@@ -352,6 +354,18 @@ html[data-lang="en"] .proj-eye{font-size:10.5px;letter-spacing:.05em}
     secs.forEach(s=>nio.observe(s));
   }
 
+})();
+</script>
+<script>
+// adaptive zoom: desktop scales proportionally, mobile keeps responsive layout
+(function(){
+  var BW=1440,BH=900,MIN=0.65,MAX=1.2,BP=820;
+  function apply(){
+    if(window.innerWidth<BP){document.documentElement.style.zoom='';return}
+    var z=Math.min(window.innerWidth/BW,window.innerHeight/BH);
+    document.documentElement.style.zoom=Math.max(MIN,Math.min(MAX,z));
+  }
+  apply();window.addEventListener('resize',apply);
 })();
 </script>
 </body>
